@@ -61,7 +61,7 @@ public class ProductoLimpieza extends Producto{
                 ", descripcion='" + descripcion + '\'' +
                 ", stock=" + stock +
                 ", precioUnidad=" + precioUnidad +
-                ", porcGanancia=" + porcGanancia +
+                ", porcGanancia=" + porcentajeGanancia +
                 ", disponibleParaVenta=" + disponibleParaVenta +
                 '}';
     }

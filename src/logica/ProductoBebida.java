@@ -3,6 +3,8 @@ package logica;
 public class ProductoBebida extends Producto {
     private double gradAlcohol;
     private boolean esImportado;
+    //private Date fechaVencimiento;
+    //private double calorias.
 
     public ProductoBebida() {};
 
@@ -22,8 +24,8 @@ public class ProductoBebida extends Producto {
         this.esImportado = esImportado;
     }
 
-    public ProductoBebida(String id, String descripcion, int stock, double precioUnidad, double porcGanancia, boolean disponibleParaVenta, double gradAlcohol, boolean esImportado) {
-        super(id, descripcion, stock, precioUnidad, porcGanancia, disponibleParaVenta);
+    public ProductoBebida(String id, String descripcion, int stock, double precioUnidad, double porcentajeGanancia, boolean disponibleParaVenta, double gradAlcohol, boolean esImportado) {
+        super(id, descripcion, stock, precioUnidad, porcentajeGanancia, disponibleParaVenta);
         if (this.idValido(id)) {
             this.id = id;
         } else {
@@ -49,7 +51,7 @@ public class ProductoBebida extends Producto {
                 ", stock=" + stock +
                 ", descripcion='" + descripcion + '\'' +
                 ", precioUnidad=" + precioUnidad +
-                ", porcGanancia=" + porcGanancia +
+                ", porcentajeGanancia=" + porcentajeGanancia +
                 ", disponibleParaVenta=" + disponibleParaVenta +
                 '}';
     }

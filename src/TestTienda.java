@@ -1,22 +1,19 @@
-import logica.Producto;
-import logica.ProductoBebida;
-import logica.ProductoEnvasado;
-import logica.ProductoLimpieza;
+import logica.*;
 
 public class TestTienda {
     public static void main(String[] args) {
 
-//        Producto prod = new Producto("55555", "desc", 5, 3, 6, true );
+        Tienda t = new Tienda("Panchito", 0, 500);
 
-//        ProductoBebida p3 = new ProductoBebida("AC123", "Desc3", 11, 3.5, 8.1, true, 6.6, true );
-//
-//        ProductoEnvasado p1 = new ProductoEnvasado("AB123", "desc", 5, 3.1, 7.01, true, "vidrio", false);
-//
-//        ProductoLimpieza p2 = new ProductoLimpieza("AZ123", "Limpiador", 10, 15.5, 20.0, true, "COCINA");
+        ProductoEnvasado pe = new ProductoEnvasado("AB123", "Fideos", 5, 20, 2.5, true, "Plastico", true );
 
-//        System.out.println("El producto envasado es: " + p1.toString());
-//        System.out.println("El producto bebida es: " + p3.toString());
-//        System.out.println("El producto limpieza es: " + p2.toString());
+        System.out.println("El costo total del producto es: " + pe.costoTotal());
+
+        System.out.println("El estado actual de la tienda es: " + t.toString());
+
+         t.realizarCompra(pe, 10);
+
+        System.out.println("El estado actual de la tienda luego de la compra test es: " + t.toString());
 
 
     }

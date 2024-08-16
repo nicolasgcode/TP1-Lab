@@ -6,8 +6,9 @@ public class Producto {
     protected String descripcion;
     protected int stock;
     protected double precioUnidad;
-    protected double porcGanancia;
+    protected double porcentajeGanancia;
     protected boolean disponibleParaVenta;
+    protected double porcentajeDto;
 
     public Producto() {
     }
@@ -18,7 +19,7 @@ public class Producto {
         this.descripcion = descripcion;
         this.stock = stock;
         this.precioUnidad = precioUnidad;
-        this.porcGanancia = porcGanancia;
+        this.porcentajeGanancia = porcentajeGanancia;
         this.disponibleParaVenta = disponibleParaVenta;
     }
 
@@ -55,11 +56,11 @@ public class Producto {
     }
 
     public double getPorcGanancia() {
-        return porcGanancia;
+        return porcentajeGanancia;
     }
 
     public void setPorcGanancia(double porcGanancia) {
-        this.porcGanancia = porcGanancia;
+        this.porcentajeGanancia = porcGanancia;
     }
 
     public boolean isDisponibleParaVenta() {
@@ -70,14 +71,18 @@ public class Producto {
         this.disponibleParaVenta = disponibleParaVenta;
     }
 
-    public double aplicarDescuento() {
+    public void aplicarDescuento(double porcentajeDto) {
 
-        return 0;
+        this.porcentajeDto = porcentajeDto;
 
     };
 
-    public double calcularPrecioFinal() {
+    public double costoTotal () {
+        double costoTotal = precioUnidad * stock;
+        return costoTotal;
+    };
 
+    public double calcularPrecioFinal() {
         return 0;
     }
 

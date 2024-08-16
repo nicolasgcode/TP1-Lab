@@ -3,6 +3,8 @@ package logica;
 public class ProductoEnvasado extends Producto {
     private String tipoEnvase;
     private boolean esImportado;
+    //private Date fechaVencimiento;
+    //private double calorias.
 
     public ProductoEnvasado() {};
 
@@ -47,7 +49,7 @@ public class ProductoEnvasado extends Producto {
                 ", descripcion='" + descripcion + '\'' +
                 ", stock=" + stock +
                 ", precioUnidad=" + precioUnidad +
-                ", porcGanancia=" + porcGanancia +
+                ", porcGanancia=" + porcentajeGanancia +
                 ", disponibleParaVenta=" + disponibleParaVenta +
                 '}';
     }
