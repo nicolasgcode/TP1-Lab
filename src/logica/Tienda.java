@@ -23,24 +23,30 @@ public class Tienda {
 
 
     public void realizarCompra(Producto producto, int cantidad) {
+
         agregarProducto(producto, cantidad);
         actualizarSaldo(producto);
+        actualizarStock(cantidad);
     }
-
 
     public void agregarProducto(Producto producto, int cantidad) {
-        if (validarStock(cantidad)) {
-            if (producto instanceof ProductoEnvasado) {
-                productosEnvasados.add((ProductoEnvasado) producto);
-            } else if (producto instanceof ProductoBebida) {
-                bebidas.add((ProductoBebida) producto);
-            } else if (producto instanceof ProductoLimpieza) {
-                productosLimpieza.add((ProductoLimpieza) producto);
-            }
-        } else {
+        if (!validarStock(cantidad)) {
             System.out.println("No se pueden agregar nuevos productos a la tienda ya que se alcanzó el máximo de stock.");
+            return;
+        }
+        if (!saldoSuficiente(producto)) {
+            System.out.println("El producto no podrá ser agregado a la tienda por saldo insuficiente en la caja.");
+            return;
+        }
+        if (producto instanceof ProductoEnvasado) {
+            productosEnvasados.add((ProductoEnvasado) producto);
+        } else if (producto instanceof ProductoBebida) {
+            bebidas.add((ProductoBebida) producto);
+        } else if (producto instanceof ProductoLimpieza) {
+            productosLimpieza.add((ProductoLimpieza) producto);
         }
     }
+
 
     public boolean saldoSuficiente(Producto producto) {
         return saldoCaja > producto.costoTotal();
@@ -50,12 +56,9 @@ public class Tienda {
     public void actualizarSaldo(Producto producto) {
         if (saldoSuficiente(producto)) {
             saldoCaja -= producto.costoTotal();
-        } else {
-            System.out.println("El producto no podrá ser agregado a la tienda por saldo insuficiente en la caja.");
         }
 
     }
-
 
     public int calcularStockTotal() {
         int stockTotal = 0;
@@ -69,7 +72,10 @@ public class Tienda {
     public boolean validarStock(int cantidad) {
         return calcularStockTotal() + cantidad <= stockMax;
     }
-    
+
+    public void actualizarStock(int cantidad) {
+        stockMax -= cantidad;
+    }
 
     @Override
     public String toString() {
@@ -82,6 +88,11 @@ public class Tienda {
                 ", productosLimpieza=" + productosLimpieza +
                 '}';
     }
+
+//    public boolean validarProducto(Producto producto) {
+//
+//        return producto.getId() != null;
+//    }
 
     //RealizarVenta
 }

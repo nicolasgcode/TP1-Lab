@@ -15,12 +15,15 @@ public class Producto {
 
     ;
 
-    public Producto(String id, String descripcion, int stock, double precioUnidad, double porcGanancia, boolean disponibleParaVenta) {
-        this.descripcion = descripcion;
-        this.stock = stock;
-        this.precioUnidad = precioUnidad;
-        this.porcentajeGanancia = porcentajeGanancia;
-        this.disponibleParaVenta = disponibleParaVenta;
+    public Producto(String id, String descripcion, int stock, double precioUnidad, double porcentajeGanancia, boolean disponibleParaVenta) {
+        if (idValido(id)) {
+            this.descripcion = descripcion;
+            this.stock = stock;
+            this.precioUnidad = precioUnidad;
+            this.porcentajeGanancia = porcentajeGanancia;
+            this.disponibleParaVenta = disponibleParaVenta;
+        }
+
     }
 
     public String getId() {
@@ -75,12 +78,16 @@ public class Producto {
 
         this.porcentajeDto = porcentajeDto;
 
-    };
+    }
 
-    public double costoTotal () {
+    ;
+
+    public double costoTotal() {
         double costoTotal = precioUnidad * stock;
         return costoTotal;
-    };
+    }
+
+    ;
 
     public double calcularPrecioFinal() {
         return 0;
@@ -92,5 +99,7 @@ public class Producto {
 
         return id.matches("^[a-zA-Z0-9]{5}$");
 
-    };
+    }
+
+    ;
 }

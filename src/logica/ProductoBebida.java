@@ -6,7 +6,10 @@ public class ProductoBebida extends Producto {
     //private Date fechaVencimiento;
     //private double calorias.
 
-    public ProductoBebida() {};
+    public ProductoBebida() {
+    }
+
+    ;
 
     public double getGradAlcohol() {
         return gradAlcohol;
@@ -28,19 +31,20 @@ public class ProductoBebida extends Producto {
         super(id, descripcion, stock, precioUnidad, porcentajeGanancia, disponibleParaVenta);
         if (this.idValido(id)) {
             this.id = id;
+            this.gradAlcohol = gradAlcohol;
+            this.esImportado = esImportado;
         } else {
             System.out.println("Id invalido");
         }
-        this.gradAlcohol = gradAlcohol;
-        this.esImportado = esImportado;
 
 
     }
-        @Override
-        public boolean idValido(String id){
-            return super.idValido(id) && id.matches("AC\\d{3}");
 
-        }
+    @Override
+    public boolean idValido(String id) {
+        return super.idValido(id) && id.matches("AC\\d{3}");
+
+    }
 
     @Override
     public String toString() {

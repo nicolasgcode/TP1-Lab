@@ -1,28 +1,31 @@
 package logica;
 
-public class ProductoLimpieza extends Producto{
+public class ProductoLimpieza extends Producto {
 
     private enum TipoAplicacion {COCINA, BANIO, ROPA, MULTIUSO}
 
     TipoAplicacion tipoAplicacion;
 
 
-    public ProductoLimpieza() {};
+    public ProductoLimpieza() {
+    }
+
+    ;
 
     public ProductoLimpieza(String id, String descripcion, int stock, double precioUnidad, double porcGanancia, boolean disponibleParaVenta, String tipo) {
         super(id, descripcion, stock, precioUnidad, porcGanancia, disponibleParaVenta);
         if (this.idValido(id)) {
             this.id = id;
+            if (esTipoValido(tipo)) {
+                this.tipoAplicacion = TipoAplicacion.valueOf(tipo.toUpperCase());
+
+            } else {
+                System.out.println("Tipo invalido");
+            }
         } else {
             System.out.println("Id invalido");
         }
 
-        if (esTipoValido(tipo)) {
-            this.tipoAplicacion = TipoAplicacion.valueOf(tipo.toUpperCase());
-
-        } else {
-            System.out.println("Tipo invalido");
-        }
     }
 
     public TipoAplicacion getTipoAplicacion() {
@@ -34,24 +37,24 @@ public class ProductoLimpieza extends Producto{
     }
 
     @Override
-        public boolean idValido(String id){
-            return super.idValido(id) && id.matches("AZ\\d{3}");
+    public boolean idValido(String id) {
+        return super.idValido(id) && id.matches("AZ\\d{3}");
 
 
-        }
+    }
 
-        private boolean esTipoValido(String tipo) {
-            if (tipo != null) {
-                try {
-                    TipoAplicacion.valueOf(tipo.toUpperCase());
-                    return true;
-                } catch (IllegalArgumentException e) {
-                    return false;
+    private boolean esTipoValido(String tipo) {
+        if (tipo != null) {
+            try {
+                TipoAplicacion.valueOf(tipo.toUpperCase());
+                return true;
+            } catch (IllegalArgumentException e) {
+                return false;
 
-                }
             }
-            return false;
         }
+        return false;
+    }
 
     @Override
     public String toString() {

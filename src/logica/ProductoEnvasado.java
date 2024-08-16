@@ -9,17 +9,16 @@ public class ProductoEnvasado extends Producto {
     public ProductoEnvasado() {
     }
 
-    ;
-
-    public ProductoEnvasado(String id, String descripcion, int stock, double precioUnidad, double porcGanancia, boolean disponibleParaVenta, String tipoEnvase, boolean esImportado) {
-        super(id, descripcion, stock, precioUnidad, porcGanancia, disponibleParaVenta);
+    public ProductoEnvasado(String id, String descripcion, int stock, double precioUnidad, double porcentajeGanancia, boolean disponibleParaVenta, String tipoEnvase, boolean esImportado) {
+        super(id, descripcion, stock, precioUnidad, porcentajeGanancia, disponibleParaVenta);
         if (this.idValido(id)) {
             this.id = id;
+            this.tipoEnvase = tipoEnvase;
+            this.esImportado = esImportado;
         } else {
             System.out.println("Id invalido");
         }
-        this.tipoEnvase = tipoEnvase;
-        this.esImportado = esImportado;
+
 
     }
 
