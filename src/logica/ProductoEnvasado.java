@@ -6,10 +6,13 @@ public class ProductoEnvasado extends Producto {
     //private Date fechaVencimiento;
     //private double calorias.
 
-    public ProductoEnvasado() {};
+    public ProductoEnvasado() {
+    }
+
+    ;
 
     public ProductoEnvasado(String id, String descripcion, int stock, double precioUnidad, double porcGanancia, boolean disponibleParaVenta, String tipoEnvase, boolean esImportado) {
-        super(id,descripcion, stock, precioUnidad,porcGanancia, disponibleParaVenta );
+        super(id, descripcion, stock, precioUnidad, porcGanancia, disponibleParaVenta);
         if (this.idValido(id)) {
             this.id = id;
         } else {
@@ -17,6 +20,7 @@ public class ProductoEnvasado extends Producto {
         }
         this.tipoEnvase = tipoEnvase;
         this.esImportado = esImportado;
+
     }
 
     public String getTipoEnvase() {
@@ -36,9 +40,11 @@ public class ProductoEnvasado extends Producto {
     }
 
     @Override
-    public boolean idValido(String id){
+    public boolean idValido(String id) {
         return super.idValido(id) && id.matches("AB\\d{3}");
-    };
+    }
+
+    ;
 
     @Override
     public String toString() {

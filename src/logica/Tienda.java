@@ -19,44 +19,43 @@ public class Tienda {
         productosEnvasados = new ArrayList<>();
         bebidas = new ArrayList<>();
         productosLimpieza = new ArrayList<>();
-    };
-
+    }
 
 
     public void realizarCompra(Producto producto, int cantidad) {
-        if (validarStock(cantidad)) {
-            agregarProducto(producto);
-        }
-
+        agregarProducto(producto, cantidad);
         actualizarSaldo(producto);
-        stockMax--;
-    };
+    }
 
-    public void agregarProducto(Producto producto) {
-        if (producto instanceof ProductoEnvasado) {
-            productosEnvasados.add((ProductoEnvasado) producto);
-        }
-        else if (producto instanceof ProductoBebida) {
-            bebidas.add((ProductoBebida) producto);
-        }
-        else if (producto instanceof ProductoLimpieza) {
-            productosLimpieza.add((ProductoLimpieza) producto);
-        }
 
-    };
+    public void agregarProducto(Producto producto, int cantidad) {
+        if (validarStock(cantidad)) {
+            if (producto instanceof ProductoEnvasado) {
+                productosEnvasados.add((ProductoEnvasado) producto);
+            } else if (producto instanceof ProductoBebida) {
+                bebidas.add((ProductoBebida) producto);
+            } else if (producto instanceof ProductoLimpieza) {
+                productosLimpieza.add((ProductoLimpieza) producto);
+            }
+        } else {
+            System.out.println("No se pueden agregar nuevos productos a la tienda ya que se alcanzó el máximo de stock.");
+        }
+    }
 
     public boolean saldoSuficiente(Producto producto) {
         return saldoCaja > producto.costoTotal();
-    };
+    }
 
-    public void actualizarSaldo (Producto producto) {
+
+    public void actualizarSaldo(Producto producto) {
         if (saldoSuficiente(producto)) {
             saldoCaja -= producto.costoTotal();
         } else {
             System.out.println("El producto no podrá ser agregado a la tienda por saldo insuficiente en la caja.");
         }
 
-    };
+    }
+
 
     public int calcularStockTotal() {
         int stockTotal = 0;
@@ -66,9 +65,11 @@ public class Tienda {
         return stockTotal;
     }
 
+
     public boolean validarStock(int cantidad) {
         return calcularStockTotal() + cantidad <= stockMax;
-    };
+    }
+    
 
     @Override
     public String toString() {
