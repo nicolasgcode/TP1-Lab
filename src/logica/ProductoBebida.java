@@ -29,7 +29,7 @@ public class ProductoBebida extends Producto implements IComestible {
         this.esImportado = esImportado;
     }
 
-    public ProductoBebida(String id, String descripcion, int stock, double precioUnidad, double porcentajeGanancia, boolean disponibleParaVenta, double gradAlcohol, boolean esImportado) {
+    public ProductoBebida(String id, String descripcion, int stock, double precioUnidad, double porcentajeGanancia, boolean disponibleParaVenta, double gradAlcohol, boolean esImportado, double calorias) {
         super(id, descripcion, stock, precioUnidad, porcentajeGanancia, disponibleParaVenta);
         if (!this.idValido(id)) {
             System.out.println("Id invalido");
@@ -38,22 +38,22 @@ public class ProductoBebida extends Producto implements IComestible {
         this.id = id;
         this.gradAlcohol = gradAlcohol;
         this.esImportado = esImportado;
-        this.calorias = calcularCalorias(gradAlcohol);
+        this.calorias = calcularCalorias(calorias);
     }
 
-    public double calcularCalorias(double gradAlcohol) {
+    public double calcularCalorias(double calorias) {
         if (gradAlcohol < 0) {
             System.out.println("Ingrese un número válido de calorías");
             return 0;
         }
-        if (0 < gradAlcohol && gradAlcohol < 2) {
-            this.calorias = gradAlcohol;
-        } else if (2.1 < gradAlcohol && gradAlcohol < 4.5) {
-            this.calorias = gradAlcohol * 1.25;
+        if (0 <= gradAlcohol && gradAlcohol <= 2) {
+            return calorias;
+        } else if (2.1 <= gradAlcohol && gradAlcohol <= 4.5) {
+            return calorias * 1.25;
         } else if (gradAlcohol > 4.5) {
-            this.calorias = gradAlcohol * 1.5;
+            return calorias * 1.5;
         }
-        return this.calorias;
+        return calorias;
     }
 
     public double getCalorias() {

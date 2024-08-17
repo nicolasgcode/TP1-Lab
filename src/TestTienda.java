@@ -3,7 +3,7 @@ import logica.*;
 public class TestTienda {
     public static void main(String[] args) {
 
-        ProductoBebida productoBebida = new ProductoBebida("AC123", "Gancia", 6, 50, 2.3, true, 3, true);
+        ProductoBebida productoBebida = new ProductoBebida("AC123", "Gancia", 6, 50, 2.3, true, 2.1, true, 100);
 
         System.out.println(productoBebida.getCalorias());
 //        Tienda t = new Tienda("Shop", 100, 100);
