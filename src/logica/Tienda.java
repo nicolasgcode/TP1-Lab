@@ -16,14 +16,12 @@ public class Tienda {
         this.nombre = nombre;
         this.stockMax = stockMax;
         this.saldoCaja = saldoCaja;
-        productosEnvasados = new ArrayList<>();
-        bebidas = new ArrayList<>();
-        productosLimpieza = new ArrayList<>();
+        productosEnvasados = new ArrayList<ProductoEnvasado>();
+        productosLimpieza = new ArrayList<ProductoLimpieza>();
+        bebidas = new ArrayList<ProductoBebida>();
     }
 
-
     public void realizarCompra(Producto producto, int cantidad) {
-
         agregarProducto(producto, cantidad);
         actualizarSaldo(producto);
         actualizarStock(cantidad);
@@ -47,17 +45,14 @@ public class Tienda {
         }
     }
 
-
     public boolean saldoSuficiente(Producto producto) {
-        return saldoCaja > producto.costoTotal();
+        return saldoCaja >= producto.costoTotal();
     }
-
 
     public void actualizarSaldo(Producto producto) {
         if (saldoSuficiente(producto)) {
             saldoCaja -= producto.costoTotal();
         }
-
     }
 
     public int calcularStockTotal() {
@@ -67,7 +62,6 @@ public class Tienda {
         stockTotal += productosLimpieza.stream().mapToInt(Producto::getStock).sum();
         return stockTotal;
     }
-
 
     public boolean validarStock(int cantidad) {
         return calcularStockTotal() + cantidad <= stockMax;
@@ -94,5 +88,7 @@ public class Tienda {
 //        return producto.getId() != null;
 //    }
 
-    //RealizarVenta
+    public void realizarVenta() {
+
+    }
 }

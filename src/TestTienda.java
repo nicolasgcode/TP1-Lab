@@ -9,11 +9,9 @@ public class TestTienda {
 
         System.out.println(pe);
 
-
         System.out.println("El costo total del producto es: " + pe.costoTotal());
 
         System.out.println("El estado actual de la tienda es: " + t.toString());
-
 
         t.realizarCompra(pe, 10);
 

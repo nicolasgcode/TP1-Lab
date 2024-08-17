@@ -11,9 +11,8 @@ public class Producto {
     protected double porcentajeDto;
 
     public Producto() {
-    }
 
-    ;
+    }
 
     public Producto(String id, String descripcion, int stock, double precioUnidad, double porcentajeGanancia, boolean disponibleParaVenta) {
         if (idValido(id)) {
@@ -23,7 +22,6 @@ public class Producto {
             this.porcentajeGanancia = porcentajeGanancia;
             this.disponibleParaVenta = disponibleParaVenta;
         }
-
     }
 
     public String getId() {
@@ -80,20 +78,14 @@ public class Producto {
 
     }
 
-    ;
-
     public double costoTotal() {
-        double costoTotal = precioUnidad * stock;
-        return costoTotal;
+        return precioUnidad * stock;
     }
 
-    ;
 
     public double calcularPrecioFinal() {
         return 0;
     }
-
-    ;
 
     public boolean idValido(String id) {
 
@@ -101,5 +93,4 @@ public class Producto {
 
     }
 
-    ;
 }

@@ -10,22 +10,17 @@ public class ProductoLimpieza extends Producto {
     public ProductoLimpieza() {
     }
 
-    ;
-
     public ProductoLimpieza(String id, String descripcion, int stock, double precioUnidad, double porcGanancia, boolean disponibleParaVenta, String tipo) {
         super(id, descripcion, stock, precioUnidad, porcGanancia, disponibleParaVenta);
-        if (this.idValido(id)) {
-            this.id = id;
-            if (esTipoValido(tipo)) {
-                this.tipoAplicacion = TipoAplicacion.valueOf(tipo.toUpperCase());
-
-            } else {
-                System.out.println("Tipo invalido");
-            }
-        } else {
+        if (!this.idValido(id)) {
             System.out.println("Id invalido");
+            return;
         }
-
+        if (!esTipoValido(tipo)) {
+            System.out.println("Tipo invalido");
+            return;
+        }
+        this.id = id;
     }
 
     public TipoAplicacion getTipoAplicacion() {
@@ -40,20 +35,18 @@ public class ProductoLimpieza extends Producto {
     public boolean idValido(String id) {
         return super.idValido(id) && id.matches("AZ\\d{3}");
 
-
     }
 
     private boolean esTipoValido(String tipo) {
-        if (tipo != null) {
-            try {
-                TipoAplicacion.valueOf(tipo.toUpperCase());
-                return true;
-            } catch (IllegalArgumentException e) {
-                return false;
-
-            }
+        if (tipo == null) {
+            return false;
         }
-        return false;
+        try {
+            TipoAplicacion.valueOf(tipo.toUpperCase());
+            return true;
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
     }
 
     @Override

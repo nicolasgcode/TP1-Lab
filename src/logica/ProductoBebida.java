@@ -1,6 +1,8 @@
 package logica;
 
-public class ProductoBebida extends Producto {
+import interfaces.IComestible;
+
+public class ProductoBebida extends Producto implements IComestible {
     private double gradAlcohol;
     private boolean esImportado;
     //private Date fechaVencimiento;
@@ -8,8 +10,6 @@ public class ProductoBebida extends Producto {
 
     public ProductoBebida() {
     }
-
-    ;
 
     public double getGradAlcohol() {
         return gradAlcohol;
@@ -29,21 +29,19 @@ public class ProductoBebida extends Producto {
 
     public ProductoBebida(String id, String descripcion, int stock, double precioUnidad, double porcentajeGanancia, boolean disponibleParaVenta, double gradAlcohol, boolean esImportado) {
         super(id, descripcion, stock, precioUnidad, porcentajeGanancia, disponibleParaVenta);
-        if (this.idValido(id)) {
-            this.id = id;
-            this.gradAlcohol = gradAlcohol;
-            this.esImportado = esImportado;
-        } else {
+        if (!this.idValido(id)) {
             System.out.println("Id invalido");
+            return;
         }
-
-
+        this.id = id;
+        this.gradAlcohol = gradAlcohol;
+        this.esImportado = esImportado;
     }
+
 
     @Override
     public boolean idValido(String id) {
         return super.idValido(id) && id.matches("AC\\d{3}");
-
     }
 
     @Override
