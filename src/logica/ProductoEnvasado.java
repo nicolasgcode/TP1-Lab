@@ -37,12 +37,13 @@ public class ProductoEnvasado extends Producto implements IComestible {
     public void setEsImportado(boolean esImportado) {
         this.esImportado = esImportado;
     }
+    
 
     @Override
     public boolean idValido(String id) {
         return super.idValido(id) && id.matches("AB\\d{3}");
     }
-    
+
     @Override
     public String toString() {
         return "ProductoEnvasado{" +

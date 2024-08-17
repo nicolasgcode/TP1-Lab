@@ -21,14 +21,14 @@ public class Tienda {
         bebidas = new ArrayList<ProductoBebida>();
     }
 
-    public void realizarCompra(Producto producto, int cantidad) {
-        agregarProducto(producto, cantidad);
+    public void realizarCompra(Producto producto) {
+        agregarProducto(producto);
         actualizarSaldo(producto);
-        actualizarStock(cantidad);
+        actualizarStock(producto);
     }
 
-    public void agregarProducto(Producto producto, int cantidad) {
-        if (!validarStock(cantidad)) {
+    public void agregarProducto(Producto producto) {
+        if (!validarStock(producto)) {
             System.out.println("No se pueden agregar nuevos productos a la tienda ya que se alcanzó el máximo de stock.");
             return;
         }
@@ -63,12 +63,12 @@ public class Tienda {
         return stockTotal;
     }
 
-    public boolean validarStock(int cantidad) {
-        return calcularStockTotal() + cantidad <= stockMax;
+    public boolean validarStock(Producto producto) {
+        return calcularStockTotal() + producto.getStock() <= stockMax;
     }
 
-    public void actualizarStock(int cantidad) {
-        stockMax -= cantidad;
+    public void actualizarStock(Producto producto) {
+        stockMax -= producto.getStock();
     }
 
     @Override

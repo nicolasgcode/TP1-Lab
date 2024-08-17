@@ -2,11 +2,13 @@ package logica;
 
 import interfaces.IComestible;
 
+import java.time.LocalDate;
+
 public class ProductoBebida extends Producto implements IComestible {
     private double gradAlcohol;
     private boolean esImportado;
-    //private Date fechaVencimiento;
-    //private double calorias.
+    private LocalDate fechaVencimiento;
+    private double calorias;
 
     public ProductoBebida() {
     }
@@ -36,6 +38,26 @@ public class ProductoBebida extends Producto implements IComestible {
         this.id = id;
         this.gradAlcohol = gradAlcohol;
         this.esImportado = esImportado;
+        this.calorias = calcularCalorias(gradAlcohol);
+    }
+
+    public double calcularCalorias(double gradAlcohol) {
+        if (gradAlcohol < 0) {
+            System.out.println("Ingrese un número válido de calorías");
+            return 0;
+        }
+        if (0 < gradAlcohol && gradAlcohol < 2) {
+            this.calorias = gradAlcohol;
+        } else if (2.1 < gradAlcohol && gradAlcohol < 4.5) {
+            this.calorias = gradAlcohol * 1.25;
+        } else if (gradAlcohol > 4.5) {
+            this.calorias = gradAlcohol * 1.5;
+        }
+        return this.calorias;
+    }
+
+    public double getCalorias() {
+        return calorias;
     }
 
 
@@ -49,12 +71,8 @@ public class ProductoBebida extends Producto implements IComestible {
         return "ProductoBebida{" +
                 "gradAlcohol=" + gradAlcohol +
                 ", esImportado=" + esImportado +
-                ", id='" + id + '\'' +
-                ", stock=" + stock +
-                ", descripcion='" + descripcion + '\'' +
-                ", precioUnidad=" + precioUnidad +
-                ", porcentajeGanancia=" + porcentajeGanancia +
-                ", disponibleParaVenta=" + disponibleParaVenta +
+                ", fechaVencimiento=" + fechaVencimiento +
+                ", calorias=" + calorias +
                 '}';
     }
 };
