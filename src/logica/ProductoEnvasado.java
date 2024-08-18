@@ -58,6 +58,18 @@ public class ProductoEnvasado extends Producto implements IComestible {
         return porcentajeGanancia;
     }
 
+    public boolean validarDesc() {
+        return 0 <= porcentajeDto && porcentajeDto <= 15;
+    }
+
+    @Override
+    public void aplicarDescuento(double porcentajeDto) {
+        if (!validarDesc()) {
+            System.out.println("El porcentaje de descuento descuento debe estar entre 0 y 15");
+        }
+        this.porcentajeDto = porcentajeDto;
+
+    }
 
     @Override
     public boolean idValido(String id) {
