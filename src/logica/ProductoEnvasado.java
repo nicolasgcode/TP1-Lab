@@ -1,11 +1,12 @@
 package logica;
 
 import interfaces.IComestible;
+import interfaces.IImportado;
 
-public class ProductoEnvasado extends Producto implements IComestible {
+public class ProductoEnvasado extends Producto implements IComestible, IImportado {
     private String tipoEnvase;
     private boolean esImportado;
-    //private Date fechaVencimiento;
+    private String fechaVencimiento;
     private double calorias;
 
     public ProductoEnvasado() {
@@ -23,17 +24,30 @@ public class ProductoEnvasado extends Producto implements IComestible {
         }
     }
 
+    @Override
+    public String getFechaVencimiento() {
+        return fechaVencimiento;
+    }
+
+    @Override
+    public void setFechaVencimiento(String fechaVencimiento) {
+        this.fechaVencimiento = fechaVencimiento;
+    }
+
+    @Override
     public double getCalorias() {
         return calorias;
+    }
+
+    @Override
+    public void setCalorias(double calorias) {
+        this.calorias = calorias;
     }
 
     public double getPorcentajeGanancia() {
         return porcentajeGanancia;
     }
 
-    public void setCalorias(double calorias) {
-        this.calorias = calorias;
-    }
 
     public String getTipoEnvase() {
         return tipoEnvase;
@@ -43,10 +57,12 @@ public class ProductoEnvasado extends Producto implements IComestible {
         this.tipoEnvase = tipoEnvase;
     }
 
-    public boolean isEsImportado() {
+    @Override
+    public boolean getEsImportado() {
         return esImportado;
     }
 
+    @Override
     public void setEsImportado(boolean esImportado) {
         this.esImportado = esImportado;
     }
@@ -76,6 +92,7 @@ public class ProductoEnvasado extends Producto implements IComestible {
         return super.idValido(id) && id.matches("AB\\d{3}");
     }
 
+
     @Override
     public String toString() {
         return "ProductoEnvasado{" +
@@ -89,4 +106,6 @@ public class ProductoEnvasado extends Producto implements IComestible {
                 ", disponibleParaVenta=" + disponibleParaVenta +
                 '}';
     }
+
+
 }
