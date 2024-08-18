@@ -6,12 +6,12 @@ public class ProductoEnvasado extends Producto implements IComestible {
     private String tipoEnvase;
     private boolean esImportado;
     //private Date fechaVencimiento;
-    //private double calorias.
+    private double calorias;
 
     public ProductoEnvasado() {
     }
 
-    public ProductoEnvasado(String id, String descripcion, int stock, double precioUnidad, double porcentajeGanancia, boolean disponibleParaVenta, String tipoEnvase, boolean esImportado) {
+    public ProductoEnvasado(String id, String descripcion, int stock, double precioUnidad, double porcentajeGanancia, boolean disponibleParaVenta, String tipoEnvase, boolean esImportado, double calorias) {
         super(id, descripcion, stock, precioUnidad, porcentajeGanancia, disponibleParaVenta);
         if (!this.idValido(id)) {
             System.out.println("Id invalido");
@@ -19,7 +19,20 @@ public class ProductoEnvasado extends Producto implements IComestible {
             this.id = id;
             this.tipoEnvase = tipoEnvase;
             this.esImportado = esImportado;
+            this.porcentajeGanancia = calcularPorcentajeGanancia(porcentajeGanancia);
         }
+    }
+
+    public double getCalorias() {
+        return calorias;
+    }
+
+    public double getPorcentajeGanancia() {
+        return porcentajeGanancia;
+    }
+
+    public void setCalorias(double calorias) {
+        this.calorias = calorias;
     }
 
     public String getTipoEnvase() {
@@ -37,7 +50,14 @@ public class ProductoEnvasado extends Producto implements IComestible {
     public void setEsImportado(boolean esImportado) {
         this.esImportado = esImportado;
     }
-    
+
+    public double calcularPorcentajeGanancia(double porcentajeGanancia) {
+        if (!(0 <= porcentajeGanancia && porcentajeGanancia <= 20)) {
+            System.out.println("El porcentaje de ganancia debe estar entre 0 y 20");
+        }
+        return porcentajeGanancia;
+    }
+
 
     @Override
     public boolean idValido(String id) {

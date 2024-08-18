@@ -56,7 +56,7 @@ public class Producto {
         this.precioUnidad = precioUnidad;
     }
 
-    public double getPorcGanancia() {
+    public double getPorcentajeGanancia() {
         return porcentajeGanancia;
     }
 

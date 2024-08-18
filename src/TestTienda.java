@@ -3,9 +3,21 @@ import logica.*;
 public class TestTienda {
     public static void main(String[] args) {
 
-        ProductoBebida productoBebida = new ProductoBebida("AC123", "Gancia", 6, 50, 2.3, true, 2.1, true, 100);
+//        ProductoEnvasado productoEnvasado = new ProductoEnvasado("AB123", "desc", 5, 3, 15, true, "plastico", true, 100);
+//
+//        System.out.println(productoEnvasado.toString());
+//
+//        System.out.println(productoEnvasado.getPorcentajeGanancia());
 
-        System.out.println(productoBebida.getCalorias());
+        ProductoLimpieza pl = new ProductoLimpieza("AZ444", "desc", 5, 3.5, 27, true, "multiuso");
+        System.out.println(pl.getTipoAplicacion());
+//        System.out.println(pl.validarTipo());
+
+        System.out.println(pl.getPorcentajeGanancia());
+
+//        ProductoBebida productoBebida = new ProductoBebida("AC123", "Gancia", 6, 50, 2.3, true, 2.1, true, 100);
+//
+//        System.out.println(productoBebida.getCalorias());
 //        Tienda t = new Tienda("Shop", 100, 100);
 //
 //        ProductoEnvasado pe = new ProductoEnvasado("AB123", "Fideos", 60, 20, 2.5, true, "Plastico", true);

@@ -6,6 +6,8 @@ public class ProductoLimpieza extends Producto {
 
     TipoAplicacion tipoAplicacion;
 
+    private String tipo;
+
 
     public ProductoLimpieza() {
     }
@@ -21,10 +23,16 @@ public class ProductoLimpieza extends Producto {
             return;
         }
         this.id = id;
+        this.tipoAplicacion = TipoAplicacion.valueOf(tipo.toUpperCase());
+        this.porcentajeGanancia = calcularPorcentajeGanancia(porcentajeGanancia);
     }
 
-    public TipoAplicacion getTipoAplicacion() {
-        return tipoAplicacion;
+//    public TipoAplicacion getTipoAplicacion() {
+//        return tipoAplicacion;
+//    }
+
+    public String getTipoAplicacion() {
+        return tipoAplicacion.toString();
     }
 
     public void setTipoAplicacion(TipoAplicacion tipoAplicacion) {
@@ -47,6 +55,22 @@ public class ProductoLimpieza extends Producto {
         } catch (IllegalArgumentException e) {
             return false;
         }
+    }
+
+    public boolean validarTipo() {
+        return tipoAplicacion.equals(TipoAplicacion.COCINA);
+    }
+
+    public double calcularPorcentajeGanancia(double porcentajeGanancia) {
+
+        if (!(tipoAplicacion.equals(TipoAplicacion.COCINA) || tipoAplicacion.equals(TipoAplicacion.MULTIUSO))) {
+            return porcentajeGanancia;
+        }
+        if (!(10 <= porcentajeGanancia && porcentajeGanancia <= 25)) {
+            System.out.println("El porcentaje de ganancia debe estar entre 0 y 20");
+            return 0;
+        }
+        return porcentajeGanancia;
     }
 
     @Override
