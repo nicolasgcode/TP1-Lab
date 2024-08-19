@@ -12,8 +12,8 @@ public class ProductoEnvasado extends Producto implements IComestible, IImportad
     public ProductoEnvasado() {
     }
 
-    public ProductoEnvasado(String id, String descripcion, int stock, double precioUnidad, double porcentajeGanancia, boolean disponibleParaVenta, String tipoEnvase, boolean esImportado, String fechaVencimiento, double calorias) {
-        super(id, descripcion, stock, precioUnidad, porcentajeGanancia, disponibleParaVenta);
+    public ProductoEnvasado(String id, String descripcion, int stock, double precioUnidad, double porcentajeGanancia, String tipoEnvase, boolean esImportado, String fechaVencimiento, double calorias) {
+        super(id, descripcion, stock, precioUnidad, porcentajeGanancia);
         if (!this.idValido(id)) {
             System.out.println("Id invalido");
         } else {
@@ -25,7 +25,7 @@ public class ProductoEnvasado extends Producto implements IComestible, IImportad
             this.calorias = calorias;
         }
     }
-    
+
     @Override
     public String getFechaVencimiento() {
         return fechaVencimiento;

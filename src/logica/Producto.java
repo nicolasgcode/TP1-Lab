@@ -14,13 +14,12 @@ public abstract class Producto {
 
     }
 
-    public Producto(String id, String descripcion, int stock, double precioUnidad, double porcentajeGanancia, boolean disponibleParaVenta) {
+    public Producto(String id, String descripcion, int stock, double precioUnidad, double porcentajeGanancia) {
         if (idValido(id)) {
             this.descripcion = descripcion;
             this.stock = stock;
             this.precioUnidad = precioUnidad;
             this.porcentajeGanancia = porcentajeGanancia;
-            this.disponibleParaVenta = disponibleParaVenta;
         }
     }
 
@@ -81,7 +80,6 @@ public abstract class Producto {
     public double costoTotal() {
         return precioUnidad * stock;
     }
-
 
     public double calcularPrecioFinal() {
         return 0;

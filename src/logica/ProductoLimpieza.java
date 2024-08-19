@@ -9,8 +9,8 @@ public class ProductoLimpieza extends Producto {
     public ProductoLimpieza() {
     }
 
-    public ProductoLimpieza(String id, String descripcion, int stock, double precioUnidad, double porcGanancia, boolean disponibleParaVenta, String tipo) {
-        super(id, descripcion, stock, precioUnidad, porcGanancia, disponibleParaVenta);
+    public ProductoLimpieza(String id, String descripcion, int stock, double precioUnidad, double porcGanancia, String tipo) {
+        super(id, descripcion, stock, precioUnidad, porcGanancia);
         if (!this.idValido(id)) {
             System.out.println("Id invalido");
             return;

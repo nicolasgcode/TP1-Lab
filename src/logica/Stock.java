@@ -21,33 +21,19 @@ public class Stock {
         } else {
             producto.setStock(0);
             producto.setDisponibleParaVenta(false);
+            System.out.println("Hay productos con stock disponible menor al solicitado.");
         }
 
     }
 
-    public static void actualizarStockCompra(Producto producto, Tienda tienda) {
+    public static void actualizarStock(Producto producto, Tienda tienda) {
 
         if (!validarStockMax(producto, tienda)) {
+            System.out.println("No se pueden agregar nuevos productos a la tienda ya que se alcanzó el máximo de stock.");
             return;
-        }
-
-        if (!tienda.saldoSuficiente(producto)) {
-            return;
-        }
-
-        if (producto instanceof ProductoEnvasado) {
-            tienda.getProductosEnvasados().add((ProductoEnvasado) producto);
-        } else if (producto instanceof ProductoBebida) {
-            tienda.getBebidas().add((ProductoBebida) producto);
-        } else {
-            tienda.getProductosLimpieza().add((ProductoLimpieza) producto);
         }
 
     }
 
-    public static void actualizarStockVenta(Producto producto, Tienda tienda) {
-
-
-    }
 
 }

@@ -14,8 +14,8 @@ public class ProductoBebida extends Producto implements IComestible, IImportado 
     public ProductoBebida() {
     }
 
-    public ProductoBebida(String id, String descripcion, int stock, double precioUnidad, double porcentajeGanancia, boolean disponibleParaVenta, double gradAlcohol, boolean esImportado, double calorias, String fechaVencimiento) {
-        super(id, descripcion, stock, precioUnidad, porcentajeGanancia, disponibleParaVenta);
+    public ProductoBebida(String id, String descripcion, int stock, double precioUnidad, double porcentajeGanancia, double gradAlcohol, boolean esImportado, double calorias, String fechaVencimiento) {
+        super(id, descripcion, stock, precioUnidad, porcentajeGanancia);
         if (!this.idValido(id)) {
             System.out.println("Id invalido");
             return;

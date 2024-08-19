@@ -56,9 +56,6 @@ public class Tienda {
         return stockMax;
     }
 
-    public void setStockMax(int stockMax) {
-        this.stockMax = stockMax;
-    }
 
     public double getSaldoCaja() {
         return saldoCaja;
@@ -66,22 +63,6 @@ public class Tienda {
 
     public void setSaldoCaja(double saldoCaja) {
         this.saldoCaja = saldoCaja;
-    }
-
-
-    public void realizarCompra(Producto producto) {
-        actualizarSaldo(producto);
-        Stock.actualizarStockCompra(producto, this);
-    }
-
-    public boolean saldoSuficiente(Producto producto) {
-        return saldoCaja >= producto.costoTotal();
-    }
-
-    public void actualizarSaldo(Producto producto) {
-        if (saldoSuficiente(producto)) {
-            saldoCaja -= producto.costoTotal();
-        }
     }
 
 
@@ -96,21 +77,5 @@ public class Tienda {
                 ", productosLimpieza=" + productosLimpieza +
                 '}';
     }
-
-//    public boolean validarProducto(Producto producto) {
-//
-//        return producto.getId() != null;
-//    }
-
-    public void venderProducto(Producto producto) {
-
-    }
-
-
-    public void realizarVenta(Producto producto, int cantidad) {
-
-//        venderProducto();
-//        imprimirDetalle();
-
-    }
+    
 }
