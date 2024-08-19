@@ -1,6 +1,6 @@
 package logica;
 
-public class Producto {
+public abstract class Producto {
 
     protected String id;
     protected String descripcion;
@@ -60,8 +60,8 @@ public class Producto {
         return porcentajeGanancia;
     }
 
-    public void setPorcGanancia(double porcGanancia) {
-        this.porcentajeGanancia = porcGanancia;
+    public void setPorcentajeGanancia(double porcentajeGanancia) {
+        this.porcentajeGanancia = porcentajeGanancia;
     }
 
     public boolean isDisponibleParaVenta() {

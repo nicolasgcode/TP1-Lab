@@ -6,4 +6,5 @@ public interface IImportado {
 
     void setEsImportado(boolean esImportado);
 
+    double aplicarImpuesto();
 }

@@ -7,7 +7,6 @@ public class Tienda {
     private String nombre;
     private int stockMax;
     private double saldoCaja;
-    //private List<Producto> productos;
     private List<ProductoEnvasado> productosEnvasados;
     private List<ProductoBebida> bebidas;
     private List<ProductoLimpieza> productosLimpieza;
@@ -88,7 +87,10 @@ public class Tienda {
 //        return producto.getId() != null;
 //    }
 
-    public void realizarVenta() {
+    public void realizarVenta(Producto producto, int cantidad) {
+
+//        venderProducto();
+//        imprimirDetalle();
 
     }
 }

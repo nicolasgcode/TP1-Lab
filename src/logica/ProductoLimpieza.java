@@ -6,9 +6,6 @@ public class ProductoLimpieza extends Producto {
 
     TipoAplicacion tipoAplicacion;
 
-    private String tipo;
-
-
     public ProductoLimpieza() {
     }
 

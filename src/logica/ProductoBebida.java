@@ -13,27 +13,8 @@ public class ProductoBebida extends Producto implements IComestible, IImportado 
 
     public ProductoBebida() {
     }
-
-    public double getGradAlcohol() {
-        return gradAlcohol;
-    }
-
-    public void setGradAlcohol(double gradAlcohol) {
-        this.gradAlcohol = gradAlcohol;
-    }
-
-    @Override
-    public void setEsImportado(boolean esImportado) {
-        this.esImportado = esImportado;
-    }
-
-    @Override
-    public boolean getEsImportado() {
-        return false;
-    }
-
-
-    public ProductoBebida(String id, String descripcion, int stock, double precioUnidad, double porcentajeGanancia, boolean disponibleParaVenta, double gradAlcohol, boolean esImportado, double calorias) {
+    
+    public ProductoBebida(String id, String descripcion, int stock, double precioUnidad, double porcentajeGanancia, boolean disponibleParaVenta, double gradAlcohol, boolean esImportado, double calorias, String fechaVencimiento) {
         super(id, descripcion, stock, precioUnidad, porcentajeGanancia, disponibleParaVenta);
         if (!this.idValido(id)) {
             System.out.println("Id invalido");
@@ -43,6 +24,7 @@ public class ProductoBebida extends Producto implements IComestible, IImportado 
         this.gradAlcohol = gradAlcohol;
         this.esImportado = esImportado;
         this.calorias = calcularCalorias(calorias);
+        this.fechaVencimiento = fechaVencimiento;
     }
 
     public double calcularCalorias(double calorias) {
@@ -59,6 +41,30 @@ public class ProductoBebida extends Producto implements IComestible, IImportado 
         }
         return calorias;
     }
+
+    public double getGradAlcohol() {
+        return gradAlcohol;
+    }
+
+    public void setGradAlcohol(double gradAlcohol) {
+        this.gradAlcohol = gradAlcohol;
+    }
+
+    @Override
+    public void setEsImportado(boolean esImportado) {
+        this.esImportado = esImportado;
+    }
+
+    @Override
+    public double aplicarImpuesto() {
+        return 0;
+    }
+
+    @Override
+    public boolean getEsImportado() {
+        return false;
+    }
+
 
     @Override
     public String getFechaVencimiento() {

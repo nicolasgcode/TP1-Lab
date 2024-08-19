@@ -12,7 +12,7 @@ public class ProductoEnvasado extends Producto implements IComestible, IImportad
     public ProductoEnvasado() {
     }
 
-    public ProductoEnvasado(String id, String descripcion, int stock, double precioUnidad, double porcentajeGanancia, boolean disponibleParaVenta, String tipoEnvase, boolean esImportado, double calorias) {
+    public ProductoEnvasado(String id, String descripcion, int stock, double precioUnidad, double porcentajeGanancia, boolean disponibleParaVenta, String tipoEnvase, boolean esImportado, String fechaVencimiento, double calorias) {
         super(id, descripcion, stock, precioUnidad, porcentajeGanancia, disponibleParaVenta);
         if (!this.idValido(id)) {
             System.out.println("Id invalido");
@@ -20,10 +20,12 @@ public class ProductoEnvasado extends Producto implements IComestible, IImportad
             this.id = id;
             this.tipoEnvase = tipoEnvase;
             this.esImportado = esImportado;
+            this.fechaVencimiento = fechaVencimiento;
             this.porcentajeGanancia = calcularPorcentajeGanancia(porcentajeGanancia);
+            this.calorias = calorias;
         }
     }
-
+    
     @Override
     public String getFechaVencimiento() {
         return fechaVencimiento;
@@ -65,6 +67,11 @@ public class ProductoEnvasado extends Producto implements IComestible, IImportad
     @Override
     public void setEsImportado(boolean esImportado) {
         this.esImportado = esImportado;
+    }
+
+    @Override
+    public double aplicarImpuesto() {
+        return 0;
     }
 
     public double calcularPorcentajeGanancia(double porcentajeGanancia) {
