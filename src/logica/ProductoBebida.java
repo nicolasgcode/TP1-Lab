@@ -13,7 +13,7 @@ public class ProductoBebida extends Producto implements IComestible, IImportado 
 
     public ProductoBebida() {
     }
-    
+
     public ProductoBebida(String id, String descripcion, int stock, double precioUnidad, double porcentajeGanancia, boolean disponibleParaVenta, double gradAlcohol, boolean esImportado, double calorias, String fechaVencimiento) {
         super(id, descripcion, stock, precioUnidad, porcentajeGanancia, disponibleParaVenta);
         if (!this.idValido(id)) {
@@ -64,7 +64,6 @@ public class ProductoBebida extends Producto implements IComestible, IImportado 
     public boolean getEsImportado() {
         return false;
     }
-
 
     @Override
     public String getFechaVencimiento() {

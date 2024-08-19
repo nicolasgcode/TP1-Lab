@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Tienda {
     private String nombre;
-    private int stockMax;
+    private final int stockMax;
     private double saldoCaja;
     private List<ProductoEnvasado> productosEnvasados;
     private List<ProductoBebida> bebidas;
@@ -20,28 +20,58 @@ public class Tienda {
         bebidas = new ArrayList<ProductoBebida>();
     }
 
-    public void realizarCompra(Producto producto) {
-        agregarProducto(producto);
-        actualizarSaldo(producto);
-        actualizarStock(producto);
+    public List<ProductoLimpieza> getProductosLimpieza() {
+        return productosLimpieza;
     }
 
-    public void agregarProducto(Producto producto) {
-        if (!validarStock(producto)) {
-            System.out.println("No se pueden agregar nuevos productos a la tienda ya que se alcanzó el máximo de stock.");
-            return;
-        }
-        if (!saldoSuficiente(producto)) {
-            System.out.println("El producto no podrá ser agregado a la tienda por saldo insuficiente en la caja.");
-            return;
-        }
-        if (producto instanceof ProductoEnvasado) {
-            productosEnvasados.add((ProductoEnvasado) producto);
-        } else if (producto instanceof ProductoBebida) {
-            bebidas.add((ProductoBebida) producto);
-        } else if (producto instanceof ProductoLimpieza) {
-            productosLimpieza.add((ProductoLimpieza) producto);
-        }
+    public void setProductosLimpieza(List<ProductoLimpieza> productosLimpieza) {
+        this.productosLimpieza = productosLimpieza;
+    }
+
+    public List<ProductoBebida> getBebidas() {
+        return bebidas;
+    }
+
+    public void setBebidas(List<ProductoBebida> bebidas) {
+        this.bebidas = bebidas;
+    }
+
+    public List<ProductoEnvasado> getProductosEnvasados() {
+        return productosEnvasados;
+    }
+
+    public void setProductosEnvasados(List<ProductoEnvasado> productosEnvasados) {
+        this.productosEnvasados = productosEnvasados;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getStockMax() {
+        return stockMax;
+    }
+
+    public void setStockMax(int stockMax) {
+        this.stockMax = stockMax;
+    }
+
+    public double getSaldoCaja() {
+        return saldoCaja;
+    }
+
+    public void setSaldoCaja(double saldoCaja) {
+        this.saldoCaja = saldoCaja;
+    }
+
+
+    public void realizarCompra(Producto producto) {
+        actualizarSaldo(producto);
+        Stock.actualizarStockCompra(producto, this);
     }
 
     public boolean saldoSuficiente(Producto producto) {
@@ -54,21 +84,6 @@ public class Tienda {
         }
     }
 
-    public int calcularStockTotal() {
-        int stockTotal = 0;
-        stockTotal += productosEnvasados.stream().mapToInt(Producto::getStock).sum();
-        stockTotal += bebidas.stream().mapToInt(Producto::getStock).sum();
-        stockTotal += productosLimpieza.stream().mapToInt(Producto::getStock).sum();
-        return stockTotal;
-    }
-
-    public boolean validarStock(Producto producto) {
-        return calcularStockTotal() + producto.getStock() <= stockMax;
-    }
-
-    public void actualizarStock(Producto producto) {
-        stockMax -= producto.getStock();
-    }
 
     @Override
     public String toString() {
@@ -86,6 +101,11 @@ public class Tienda {
 //
 //        return producto.getId() != null;
 //    }
+
+    public void venderProducto(Producto producto) {
+
+    }
+
 
     public void realizarVenta(Producto producto, int cantidad) {
 
