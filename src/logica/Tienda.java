@@ -7,17 +7,14 @@ public class Tienda {
     private String nombre;
     private final int stockMax;
     private double saldoCaja;
-    private List<ProductoEnvasado> productosEnvasados;
-    private List<ProductoBebida> bebidas;
-    private List<ProductoLimpieza> productosLimpieza;
+    private List<ProductoEnvasado> productosEnvasados = new ArrayList<ProductoEnvasado>();
+    private List<ProductoBebida> bebidas = new ArrayList<ProductoBebida>();
+    private List<ProductoLimpieza> productosLimpieza = new ArrayList<ProductoLimpieza>();
 
     public Tienda(String nombre, int stockMax, double saldoCaja) {
         this.nombre = nombre;
         this.stockMax = stockMax;
         this.saldoCaja = saldoCaja;
-        productosEnvasados = new ArrayList<ProductoEnvasado>();
-        productosLimpieza = new ArrayList<ProductoLimpieza>();
-        bebidas = new ArrayList<ProductoBebida>();
     }
 
     public List<ProductoLimpieza> getProductosLimpieza() {
@@ -77,5 +74,5 @@ public class Tienda {
                 ", productosLimpieza=" + productosLimpieza +
                 '}';
     }
-    
+
 }

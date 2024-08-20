@@ -9,9 +9,20 @@ public abstract class Producto {
     protected double porcentajeGanancia;
     protected boolean disponibleParaVenta;
     protected double porcentajeDto;
+    protected boolean esImportado;
 
     public Producto() {
 
+    }
+
+    public Producto(String id, String descripcion, int stock, double precioUnidad, double porcentajeGanancia, boolean esImportado) {
+        if (idValido(id)) {
+            this.descripcion = descripcion;
+            this.stock = stock;
+            this.precioUnidad = precioUnidad;
+            this.porcentajeGanancia = porcentajeGanancia;
+            this.esImportado = esImportado;
+        }
     }
 
     public Producto(String id, String descripcion, int stock, double precioUnidad, double porcentajeGanancia) {
@@ -63,6 +74,10 @@ public abstract class Producto {
         this.porcentajeGanancia = porcentajeGanancia;
     }
 
+    public boolean isEsImportado() {
+        return esImportado;
+    }
+
     public boolean isDisponibleParaVenta() {
         return disponibleParaVenta;
     }
@@ -82,7 +97,7 @@ public abstract class Producto {
     }
 
     public double calcularPrecioFinal() {
-        return 0;
+        return costoTotal() - porcentajeDto;
     }
 
     public boolean idValido(String id) {

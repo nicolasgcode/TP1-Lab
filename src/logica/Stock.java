@@ -14,14 +14,17 @@ public class Stock {
         return calcularStockTotal(tienda) + producto.getStock() <= tienda.getStockMax();
     }
 
-    public static void validarStockVenta(Producto producto, Tienda tienda, int cantidad) {
+    public static void validarStockVenta(Producto producto, int cantidad) {
 
-        if (producto.getStock() < cantidad) {
+        if (producto.getStock() > cantidad) {
             producto.setStock(producto.getStock() - cantidad);
-        } else {
+        } else if (producto.getStock() == cantidad) {
             producto.setStock(0);
             producto.setDisponibleParaVenta(false);
+        } else {
             System.out.println("Hay productos con stock disponible menor al solicitado.");
+            producto.setStock(0);
+            producto.setDisponibleParaVenta(false);
         }
 
     }

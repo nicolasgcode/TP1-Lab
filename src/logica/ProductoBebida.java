@@ -1,13 +1,9 @@
 package logica;
 
 import interfaces.IComestible;
-import interfaces.IImportado;
 
-import java.time.LocalDate;
-
-public class ProductoBebida extends Producto implements IComestible, IImportado {
+public class ProductoBebida extends Producto implements IComestible {
     private double gradAlcohol;
-    private boolean esImportado;
     private String fechaVencimiento;
     private double calorias;
 
@@ -15,7 +11,7 @@ public class ProductoBebida extends Producto implements IComestible, IImportado 
     }
 
     public ProductoBebida(String id, String descripcion, int stock, double precioUnidad, double porcentajeGanancia, double gradAlcohol, boolean esImportado, double calorias, String fechaVencimiento) {
-        super(id, descripcion, stock, precioUnidad, porcentajeGanancia);
+        super(id, descripcion, stock, precioUnidad, porcentajeGanancia, esImportado);
         if (!this.idValido(id)) {
             System.out.println("Id invalido");
             return;
@@ -50,17 +46,15 @@ public class ProductoBebida extends Producto implements IComestible, IImportado 
         this.gradAlcohol = gradAlcohol;
     }
 
-    @Override
+
     public void setEsImportado(boolean esImportado) {
         this.esImportado = esImportado;
     }
 
-    @Override
     public double aplicarImpuesto() {
         return 0;
     }
 
-    @Override
     public boolean getEsImportado() {
         return false;
     }

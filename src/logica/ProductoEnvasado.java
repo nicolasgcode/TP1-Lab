@@ -1,11 +1,9 @@
 package logica;
 
 import interfaces.IComestible;
-import interfaces.IImportado;
 
-public class ProductoEnvasado extends Producto implements IComestible, IImportado {
+public class ProductoEnvasado extends Producto implements IComestible {
     private String tipoEnvase;
-    private boolean esImportado;
     private String fechaVencimiento;
     private double calorias;
 
@@ -13,7 +11,7 @@ public class ProductoEnvasado extends Producto implements IComestible, IImportad
     }
 
     public ProductoEnvasado(String id, String descripcion, int stock, double precioUnidad, double porcentajeGanancia, String tipoEnvase, boolean esImportado, String fechaVencimiento, double calorias) {
-        super(id, descripcion, stock, precioUnidad, porcentajeGanancia);
+        super(id, descripcion, stock, precioUnidad, porcentajeGanancia, esImportado);
         if (!this.idValido(id)) {
             System.out.println("Id invalido");
         } else {
@@ -25,6 +23,7 @@ public class ProductoEnvasado extends Producto implements IComestible, IImportad
             this.calorias = calorias;
         }
     }
+
 
     @Override
     public String getFechaVencimiento() {
@@ -59,17 +58,15 @@ public class ProductoEnvasado extends Producto implements IComestible, IImportad
         this.tipoEnvase = tipoEnvase;
     }
 
-    @Override
     public boolean getEsImportado() {
         return esImportado;
     }
 
-    @Override
+
     public void setEsImportado(boolean esImportado) {
         this.esImportado = esImportado;
     }
 
-    @Override
     public double aplicarImpuesto() {
         return 0;
     }
@@ -77,6 +74,7 @@ public class ProductoEnvasado extends Producto implements IComestible, IImportad
     public double calcularPorcentajeGanancia(double porcentajeGanancia) {
         if (!(0 <= porcentajeGanancia && porcentajeGanancia <= 20)) {
             System.out.println("El porcentaje de ganancia debe estar entre 0 y 20");
+            return 0;
         }
         return porcentajeGanancia;
     }
@@ -98,7 +96,6 @@ public class ProductoEnvasado extends Producto implements IComestible, IImportad
     public boolean idValido(String id) {
         return super.idValido(id) && id.matches("AB\\d{3}");
     }
-
 
     @Override
     public String toString() {
