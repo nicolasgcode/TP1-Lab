@@ -34,47 +34,47 @@ public abstract class Producto {
         }
     }
 
-    public String getId() {
+    protected String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    protected void setId(String id) {
         this.id = id;
     }
 
-    public String getDescripcion() {
+    protected String getDescripcion() {
         return descripcion;
     }
 
-    public void setDescripcion(String descripcion) {
+    protected void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
-    public int getStock() {
+    protected int getStock() {
         return stock;
     }
 
-    public void setStock(int stock) {
+    protected void setStock(int stock) {
         this.stock = stock;
     }
 
-    public double getPrecioUnidad() {
+    protected double getPrecioUnidad() {
         return precioUnidad;
     }
 
-    public void setPrecioUnidad(double precioUnidad) {
+    protected void setPrecioUnidad(double precioUnidad) {
         this.precioUnidad = precioUnidad;
     }
 
-    public double getPorcentajeGanancia() {
+    protected double getPorcentajeGanancia() {
         return porcentajeGanancia;
     }
 
-    public void setPorcentajeGanancia(double porcentajeGanancia) {
+    protected void setPorcentajeGanancia(double porcentajeGanancia) {
         this.porcentajeGanancia = porcentajeGanancia;
     }
 
-    public boolean isEsImportado() {
+    protected boolean isEsImportado() {
         return esImportado;
     }
 

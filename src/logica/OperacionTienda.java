@@ -1,7 +1,9 @@
 package logica;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
+import java.util.List;
 import java.util.Map;
 
 public class OperacionTienda {
@@ -12,41 +14,40 @@ public class OperacionTienda {
 
     private static double total = 0;
 
+    private static List<Producto> miCompra = new ArrayList<Producto>();
+
     private static Map<Integer, Producto> miVenta = new HashMap<Integer, Producto>();
 
-    public static void realizarCompra(Tienda tienda, Producto producto) {
+    public static void realizarCompra(Tienda tienda) {
 
-        if (!saldoSuficiente(producto, tienda)) {
+        if (!saldoSuficiente(tienda)) {
             System.out.println("El producto no podrá ser agregado a la tienda por saldo insuficiente en la caja.");
             return;
         }
+        Stock.actualizarStock(tienda);
+        tienda.setProductos(miCompra);
+        actualizarSaldo(tienda);
+    }
 
-        Stock.actualizarStock(producto, tienda);
+    public static List<Producto> getMiCompra() {
+        return miCompra;
+    }
 
-        if (producto instanceof ProductoEnvasado) {
-            tienda.getProductosEnvasados().add((ProductoEnvasado) producto);
-        } else if (producto instanceof ProductoBebida) {
-            tienda.getBebidas().add((ProductoBebida) producto);
-        } else {
-            tienda.getProductosLimpieza().add((ProductoLimpieza) producto);
-        }
-
-        actualizarSaldo(producto, tienda);
+    public static void agregarParaCompra(Producto producto) {
+        OperacionTienda.miCompra.add(producto);
     }
 
     public static Map<Integer, Producto> getMiVenta() {
         return miVenta;
     }
 
-    public static void setMiVenta(int cantidad, Producto producto) {
+    public static void agregarParaVenta(int cantidad, Producto producto) {
         OperacionTienda.miVenta.put(cantidad, producto);
     }
 
     public static void realizarVenta() {
-
         validarVenta();
         imprimirDetalle();
-
     }
 
     public static void imprimirDetalle() {
@@ -77,16 +78,20 @@ public class OperacionTienda {
             }
             Stock.validarStockVenta(p, c);
         });
-//        miVenta.forEach((c, p) -> { p.getId()});
     }
 
-    public static boolean saldoSuficiente(Producto producto, Tienda tienda) {
-        return tienda.getSaldoCaja() >= producto.costoTotal();
+    public static boolean saldoSuficiente(Tienda tienda) {
+        return tienda.getSaldoCaja() >= miCompra.stream().mapToDouble(Producto::costoTotal).sum();
     }
 
-    public static void actualizarSaldo(Producto producto, Tienda tienda) {
-        if (saldoSuficiente(producto, tienda)) {
-            tienda.setSaldoCaja(tienda.getSaldoCaja() - producto.costoTotal());
+    public static void actualizarSaldoVenta(Tienda tienda) {
+        tienda.setSaldoCaja(tienda.getSaldoCaja() + miCompra.stream().mapToDouble(Producto::costoTotal).sum());
+
+    }
+
+    public static void actualizarSaldo(Tienda tienda) {
+        if (saldoSuficiente(tienda)) {
+            tienda.setSaldoCaja(tienda.getSaldoCaja() - miCompra.stream().mapToDouble(Producto::costoTotal).sum());
         }
     }
 

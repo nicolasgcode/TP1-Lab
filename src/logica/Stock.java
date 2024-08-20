@@ -3,15 +3,13 @@ package logica;
 public class Stock {
 
     public static int calcularStockTotal(Tienda tienda) {
-        int stockTotal = 0;
-        stockTotal += tienda.getProductosEnvasados().stream().mapToInt(Producto::getStock).sum();
-        stockTotal += tienda.getBebidas().stream().mapToInt(Producto::getStock).sum();
-        stockTotal += tienda.getProductosLimpieza().stream().mapToInt(Producto::getStock).sum();
-        return stockTotal;
+
+        return tienda.getProductos().stream().mapToInt(Producto::getStock).sum();
+
     }
 
-    public static boolean validarStockMax(Producto producto, Tienda tienda) {
-        return calcularStockTotal(tienda) + producto.getStock() <= tienda.getStockMax();
+    public static boolean validarStockMax(Tienda tienda) {
+        return calcularStockTotal(tienda) + OperacionTienda.getMiCompra().stream().mapToDouble(Producto::getStock).sum() <= tienda.getStockMax();
     }
 
     public static void validarStockVenta(Producto producto, int cantidad) {
@@ -29,9 +27,9 @@ public class Stock {
 
     }
 
-    public static void actualizarStock(Producto producto, Tienda tienda) {
+    public static void actualizarStock(Tienda tienda) {
 
-        if (!validarStockMax(producto, tienda)) {
+        if (!validarStockMax(tienda)) {
             System.out.println("No se pueden agregar nuevos productos a la tienda ya que se alcanzó el máximo de stock.");
             return;
         }
