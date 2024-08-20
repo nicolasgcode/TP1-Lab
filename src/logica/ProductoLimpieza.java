@@ -6,9 +6,6 @@ public class ProductoLimpieza extends Producto {
 
     TipoAplicacion tipoAplicacion;
 
-    public ProductoLimpieza() {
-    }
-
     public ProductoLimpieza(String id, String descripcion, int stock, double precioUnidad, double porcGanancia, String tipo) {
         super(id, descripcion, stock, precioUnidad, porcGanancia);
         if (!this.idValido(id)) {
@@ -24,22 +21,9 @@ public class ProductoLimpieza extends Producto {
         this.porcentajeGanancia = calcularPorcentajeGanancia(porcentajeGanancia);
     }
 
-//    public TipoAplicacion getTipoAplicacion() {
-//        return tipoAplicacion;
-//    }
-
-    public String getTipoAplicacion() {
-        return tipoAplicacion.toString();
-    }
-
-    public void setTipoAplicacion(TipoAplicacion tipoAplicacion) {
-        this.tipoAplicacion = tipoAplicacion;
-    }
-
     @Override
     public boolean idValido(String id) {
         return super.idValido(id) && id.matches("AZ\\d{3}");
-
     }
 
     private boolean esTipoValido(String tipo) {
@@ -52,10 +36,6 @@ public class ProductoLimpieza extends Producto {
         } catch (IllegalArgumentException e) {
             return false;
         }
-    }
-
-    public boolean validarTipo() {
-        return tipoAplicacion.equals(TipoAplicacion.COCINA);
     }
 
     public double calcularPorcentajeGanancia(double porcentajeGanancia) {

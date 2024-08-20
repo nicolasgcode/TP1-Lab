@@ -7,9 +7,6 @@ public class ProductoBebida extends Producto implements IComestible {
     private String fechaVencimiento;
     private double calorias;
 
-    public ProductoBebida() {
-    }
-
     public ProductoBebida(String id, String descripcion, int stock, double precioUnidad, double porcentajeGanancia, double gradAlcohol, boolean esImportado, double calorias, String fechaVencimiento) {
         super(id, descripcion, stock, precioUnidad, porcentajeGanancia, esImportado);
         if (!this.idValido(id)) {
@@ -21,6 +18,7 @@ public class ProductoBebida extends Producto implements IComestible {
         this.esImportado = esImportado;
         this.calorias = calcularCalorias(calorias);
         this.fechaVencimiento = fechaVencimiento;
+        this.porcentajeGanancia = calcularPorcentajeGanancia();
     }
 
     public double calcularCalorias(double calorias) {
@@ -39,24 +37,12 @@ public class ProductoBebida extends Producto implements IComestible {
     }
 
     public double getGradAlcohol() {
+
         return gradAlcohol;
     }
 
-    public void setGradAlcohol(double gradAlcohol) {
-        this.gradAlcohol = gradAlcohol;
-    }
-
-
-    public void setEsImportado(boolean esImportado) {
-        this.esImportado = esImportado;
-    }
-
-    public double aplicarImpuesto() {
-        return 0;
-    }
-
     public boolean getEsImportado() {
-        return false;
+        return esImportado;
     }
 
     @Override
@@ -65,24 +51,17 @@ public class ProductoBebida extends Producto implements IComestible {
     }
 
     @Override
-    public void setFechaVencimiento(String fechaVencimiento) {
-
-    }
-
-    @Override
     public double getCalorias() {
         return calorias;
     }
 
     @Override
-    public void setCalorias(double calorias) {
-        this.calorias = calorias;
-    }
-
-
-    @Override
     public boolean idValido(String id) {
         return super.idValido(id) && id.matches("AC\\d{3}");
+    }
+
+    public double calcularPorcentajeGanancia() {
+        return IComestible.super.calcularPorcentajeGanancia(this.porcentajeGanancia);
     }
 
     @Override

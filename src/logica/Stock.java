@@ -12,17 +12,22 @@ public class Stock {
         return calcularStockTotal(tienda) + OperacionTienda.getMiCompra().stream().mapToDouble(Producto::getStock).sum() <= tienda.getStockMax();
     }
 
-    public static void validarStockVenta(Producto producto, int cantidad) {
+    public static int validarStockVenta(Producto producto, int cantidad) {
 
         if (producto.getStock() > cantidad) {
             producto.setStock(producto.getStock() - cantidad);
+            return cantidad;
         } else if (producto.getStock() == cantidad) {
             producto.setStock(0);
             producto.setDisponibleParaVenta(false);
+            return cantidad;
         } else {
+            cantidad = producto.getStock();
             System.out.println("Hay productos con stock disponible menor al solicitado.");
             producto.setStock(0);
             producto.setDisponibleParaVenta(false);
+            return cantidad;
+
         }
 
     }

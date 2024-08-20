@@ -7,15 +7,11 @@ public abstract class Producto {
     protected int stock;
     protected double precioUnidad;
     protected double porcentajeGanancia;
-    protected boolean disponibleParaVenta;
+    protected boolean disponibleParaVenta = true;
     protected double porcentajeDto;
     protected boolean esImportado;
 
-    public Producto() {
-
-    }
-
-    public Producto(String id, String descripcion, int stock, double precioUnidad, double porcentajeGanancia, boolean esImportado) {
+    protected Producto(String id, String descripcion, int stock, double precioUnidad, double porcentajeGanancia, boolean esImportado) {
         if (idValido(id)) {
             this.descripcion = descripcion;
             this.stock = stock;
@@ -25,7 +21,7 @@ public abstract class Producto {
         }
     }
 
-    public Producto(String id, String descripcion, int stock, double precioUnidad, double porcentajeGanancia) {
+    protected Producto(String id, String descripcion, int stock, double precioUnidad, double porcentajeGanancia) {
         if (idValido(id)) {
             this.descripcion = descripcion;
             this.stock = stock;
@@ -38,16 +34,8 @@ public abstract class Producto {
         return id;
     }
 
-    protected void setId(String id) {
-        this.id = id;
-    }
-
     protected String getDescripcion() {
         return descripcion;
-    }
-
-    protected void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
     }
 
     protected int getStock() {
@@ -55,38 +43,29 @@ public abstract class Producto {
     }
 
     protected void setStock(int stock) {
+
         this.stock = stock;
     }
 
-    protected double getPrecioUnidad() {
+    public double getPrecioUnidad() {
+
         return precioUnidad;
     }
 
-    protected void setPrecioUnidad(double precioUnidad) {
-        this.precioUnidad = precioUnidad;
-    }
-
-    protected double getPorcentajeGanancia() {
-        return porcentajeGanancia;
-    }
-
-    protected void setPorcentajeGanancia(double porcentajeGanancia) {
-        this.porcentajeGanancia = porcentajeGanancia;
-    }
-
-    protected boolean isEsImportado() {
+    public boolean esImportado() {
         return esImportado;
-    }
-
-    public boolean isDisponibleParaVenta() {
-        return disponibleParaVenta;
     }
 
     public void setDisponibleParaVenta(boolean disponibleParaVenta) {
         this.disponibleParaVenta = disponibleParaVenta;
     }
 
-    public void aplicarDescuento(double porcentajeDto) {
+    public boolean DisponibleParaVenta() {
+
+        return disponibleParaVenta;
+    }
+
+    protected void aplicarDescuento(double porcentajeDto) {
 
         this.porcentajeDto = porcentajeDto;
 
@@ -96,11 +75,11 @@ public abstract class Producto {
         return precioUnidad * stock;
     }
 
-    public double calcularPrecioFinal() {
+    protected double calcularPrecioFinal() {
         return costoTotal() - porcentajeDto;
     }
 
-    public boolean idValido(String id) {
+    protected boolean idValido(String id) {
 
         return id.matches("^[a-zA-Z0-9]{5}$");
 
