@@ -27,6 +27,7 @@ public class OperacionTienda {
         Stock.actualizarStock(tienda);
         tienda.setProductos(miCompra);
         actualizarSaldo(tienda);
+        imprimirDetalleCompra(tienda);
     }
 
     public static List<Producto> getMiCompra() {
@@ -34,7 +35,11 @@ public class OperacionTienda {
     }
 
     public static void agregarParaCompra(Producto producto) {
-        OperacionTienda.miCompra.add(producto);
+        if (miCompra.contains(producto)) {
+            System.out.println("Existe un producto repetido que no será agregado");
+            return;
+        }
+        miCompra.add(producto);
     }
 
     public static Map<Integer, Producto> getMiVenta() {
@@ -53,15 +58,15 @@ public class OperacionTienda {
 
     public static void Venta(Tienda tienda) {
         validarCantidadesMax();
-        imprimirDetalle();
+        imprimirDetalleVenta();
         actualizarSaldoVenta(tienda, total);
     }
 
-    public static void imprimirDetalle() {
+    public static void imprimirDetalleVenta() {
         System.out.println("===========TICKET===========");
         miVenta.forEach((i, p) -> {
             System.out.println(
-                    String.format("%s %s %d x %f", p.getId(), p.getDescripcion(), i, p.getPrecioUnidad()));
+                    String.format("%s %s %d x %.2f", p.getId(), p.getDescripcion(), i, p.getPrecioUnidad()));
             total += i * p.getPrecioUnidad();
             if (p.esImportado) {
                 total += (i * p.getPrecioUnidad()) * 0.12;
@@ -69,6 +74,18 @@ public class OperacionTienda {
         });
         System.out.println(String.format("Total venta $%f", total));
         System.out.println("============================");
+    }
+
+    public static void imprimirDetalleCompra(Tienda tienda) {
+        System.out.println("=======DETALLE DE COMPRA======");
+        miCompra.forEach((prod) -> {
+            System.out.println(
+                    String.format("PRODUCTO: %s %s %d", prod.getId(), prod.getDescripcion(), prod.getStock()));
+        });
+
+        System.out.println(String.format("SALDO EN CAJA: %.2f", tienda.getSaldoCaja()));
+
+        System.out.println("===============================");
     }
 
     public static void validarCantidadesMax() {
