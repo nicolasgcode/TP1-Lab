@@ -18,7 +18,7 @@ public class OperacionTienda {
 
     private static Map<Integer, Producto> miVenta = new HashMap<Integer, Producto>();
 
-    public static void realizarCompra(Tienda tienda) {
+    public static void Compra(Tienda tienda) {
 
         if (!saldoSuficiente(tienda)) {
             System.out.println("El producto no podrá ser agregado a la tienda por saldo insuficiente en la caja.");
@@ -51,7 +51,7 @@ public class OperacionTienda {
         OperacionTienda.miVenta.put(cant, producto);
     }
 
-    public static void realizarVenta(Tienda tienda) {
+    public static void Venta(Tienda tienda) {
         validarCantidadesMax();
         imprimirDetalle();
         actualizarSaldoVenta(tienda, total);

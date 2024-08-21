@@ -22,8 +22,8 @@ public class Stock {
             producto.setDisponibleParaVenta(false);
             return cantidad;
         } else {
-            cantidad = producto.getStock();
             System.out.println("Hay productos con stock disponible menor al solicitado.");
+            cantidad = producto.getStock();
             producto.setStock(0);
             producto.setDisponibleParaVenta(false);
             return cantidad;
