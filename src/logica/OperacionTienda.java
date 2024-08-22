@@ -1,10 +1,9 @@
 package logica;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import interfaces.IComestible;
+import modelos.*;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class OperacionTienda {
 
@@ -14,105 +13,104 @@ public class OperacionTienda {
 
     private static double total = 0;
 
-    private static List<Producto> miCompra = new ArrayList<Producto>();
-
-    private static Map<Integer, Producto> miVenta = new HashMap<Integer, Producto>();
-
-    public static void Compra(Tienda tienda) {
-
-        if (!saldoSuficiente(tienda)) {
+    public static void Compra(Tienda tienda, Carro c) {
+        int costo_total = c.getCostoTotal();
+        if (!saldoSuficiente(tienda, costo_total)) {
             System.out.println("El producto no podrá ser agregado a la tienda por saldo insuficiente en la caja.");
             return;
         }
-        Stock.actualizarStock(tienda);
-        tienda.setProductos(miCompra);
-        actualizarSaldo(tienda);
-        imprimirDetalleCompra(tienda);
+        Stock.agregarStock(tienda, c);
+        double costo = calcularTotal(c, false);
+        actualizarSaldo(tienda, -costo);
+        imprimirTicket("COMPRA", c, tienda);
+        clean(c);
     }
 
-    public static List<Producto> getMiCompra() {
-        return miCompra;
-    }
+    public static void Venta(Tienda tienda, Carro c) {
 
-    public static void agregarParaCompra(Producto producto) {
-        if (miCompra.contains(producto)) {
-            System.out.println("Existe un producto repetido que no será agregado");
+        if (validarCantidadProductos(c)) {
+            System.out.println("No se pueden vender más 3 productos.");
             return;
         }
-        miCompra.add(producto);
-    }
-
-    public static Map<Integer, Producto> getMiVenta() {
-        return miVenta;
-    }
-
-    public static void agregarParaVenta(int cantidad, Producto producto, Tienda tienda) {
-        Producto p2 = tienda.getProductos().stream().filter(p -> producto.getId().equals(p.getId())).findFirst().orElse(null);
-        if (!p2.DisponibleParaVenta()) {
-            System.out.println(String.format("El producto %s %s no se encuentra disponible", p2.getId(), p2.getDescripcion()));
+        if (tienda.getProductos().size() == 0) {
+            System.out.println("No hay productos en stock");
             return;
         }
-        int cant = Stock.validarStockVenta(producto, cantidad);
-        OperacionTienda.miVenta.put(cant, producto);
+        // c.getCarrito().forEach((prod, cant) -> {
+        // if (validarCantidadMaximaPorProductos(cant)) {
+        // c.getCarrito().put(prod, MAX_CANTIDAD);
+        // Stock.validarStockVenta(tienda, prod, MAX_CANTIDAD);
+        // return;
+        // }
+        // Stock.validarStockVenta(tienda, prod, cant);
+        // });
+        Stock.eliminarStock(tienda, c);
+        double costo = calcularTotal(c, true);
+        actualizarSaldo(tienda, costo);
+        imprimirTicket("VENTA", c, tienda);
+        clean(c);
     }
 
-    public static void Venta(Tienda tienda) {
-        validarCantidadesMax();
-        imprimirDetalleVenta();
-        actualizarSaldoVenta(tienda, total);
-    }
-
-    public static void imprimirDetalleVenta() {
-        System.out.println("===========TICKET===========");
-        miVenta.forEach((i, p) -> {
+    public static void detalleTicket(Carro c) {
+        c.getCarrito().forEach((prod, cant) -> {
             System.out.println(
-                    String.format("%s %s %d x %.2f", p.getId(), p.getDescripcion(), i, p.getPrecioUnidad()));
-            total += i * p.getPrecioUnidad();
-            if (p.esImportado) {
-                total += (i * p.getPrecioUnidad()) * 0.12;
+                    String.format("%s %s %d x %.2f", prod.getId(), prod.getDescripcion(), cant,
+                            prod.getPrecioUnidad()));
+        });
+    }
+
+    public static void imprimirTicket(String detalle, Carro c, Tienda tienda) {
+        System.out.println(String.format("===========TICKET %s===========", detalle));
+        detalleTicket(c);
+        System.out.println(String.format("Total $%.2f", total));
+        System.out.println(String.format("Saldo en caja $%.2f", tienda.getSaldoCaja()));
+        System.out.println("===================================");
+    }
+
+    private static boolean validarCantidadProductos(Carro c) {
+        return c.getCarrito().size() > MAX_PRODUCTOS;
+    }
+
+    public static boolean validarCantidadMaximaPorProductos(int cant) {
+        return cant > MAX_CANTIDAD;
+    }
+
+    public static boolean saldoSuficiente(Tienda tienda, int c) {
+        return tienda.getSaldoCaja() >= c;
+    }
+
+    private static double calcularTotal(Carro c, boolean venta) {
+        c.getCarrito().forEach((prod, cant) -> {
+            total += cant * prod.getPrecioUnidad();
+            if (venta) {
+                total += (cant * prod.getPrecioUnidad()) * 0.12;
             }
         });
-        System.out.println(String.format("Total venta $%f", total));
-        System.out.println("============================");
+        return total;
     }
 
-    public static void imprimirDetalleCompra(Tienda tienda) {
-        System.out.println("=======DETALLE DE COMPRA======");
-        miCompra.forEach((prod) -> {
-            System.out.println(
-                    String.format("PRODUCTO: %s %s %d", prod.getId(), prod.getDescripcion(), prod.getStock()));
-        });
-
-        System.out.println(String.format("SALDO EN CAJA: %.2f", tienda.getSaldoCaja()));
-
-        System.out.println("===============================");
+    public static void actualizarSaldo(Tienda tienda, double costo) {
+        tienda.setSaldoCaja(tienda.getSaldoCaja() + costo);
     }
 
-    public static void validarCantidadesMax() {
-        if (MAX_PRODUCTOS < miVenta.size()) {
-            System.out.println("Se ha alcanzado el máximo de productos posibles para una venta.");
-            return;
-        }
-
-        miVenta.forEach((c, p) -> {
-            if (c > MAX_CANTIDAD) {
-                System.out.println("No se pueden vender más de 12 unidades por producto.");
-            }
-        });
+    private static void clean(Carro c) {
+        total = 0;
+        c.emptyCarrito();
     }
 
-    public static boolean saldoSuficiente(Tienda tienda) {
-        return tienda.getSaldoCaja() >= miCompra.stream().mapToDouble(Producto::costoTotal).sum();
+    public static Producto getProductoFromStock(Tienda tienda, Producto producto) {
+        return tienda.getProductos().stream().filter(prod -> prod.getId().equals(producto.getId()))
+                .findFirst()
+                .orElse(null);
     }
 
-    public static void actualizarSaldoVenta(Tienda tienda, double total) {
-        tienda.setSaldoCaja(tienda.getSaldoCaja() + total);
-    }
+    public static void obtenerComestiblesConMenorDescuento(Tienda tienda, double desc) {
 
-    public static void actualizarSaldo(Tienda tienda) {
-        if (saldoSuficiente(tienda)) {
-            tienda.setSaldoCaja(tienda.getSaldoCaja() - miCompra.stream().mapToDouble(Producto::costoTotal).sum());
-        }
+        tienda.getProductos().stream()
+                .filter(prod -> prod instanceof IComestible && prod.esImportado() == false
+                        && prod.getPorcentajeDto() < desc)
+                .sorted(Comparator.comparing(Producto::getPrecioUnidad)).forEach(p -> {
+                    System.out.println(p.getDescripcion().toUpperCase());
+                });
     }
-
 }

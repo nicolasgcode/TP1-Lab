@@ -1,4 +1,4 @@
-package logica;
+package modelos;
 
 public abstract class Producto {
 
@@ -11,38 +11,40 @@ public abstract class Producto {
     protected double porcentajeDto;
     protected boolean esImportado;
 
-    protected Producto(String id, String descripcion, int stock, double precioUnidad, double porcentajeGanancia, boolean esImportado) {
+    protected Producto(String id, String descripcion, int stock, double precioUnidad, double porcentajeGanancia, boolean esImportado, double porcentajeDto) {
         if (idValido(id)) {
             this.descripcion = descripcion;
             this.stock = stock;
             this.precioUnidad = precioUnidad;
             this.porcentajeGanancia = porcentajeGanancia;
             this.esImportado = esImportado;
+            this.porcentajeDto = porcentajeDto;
         }
     }
 
-    protected Producto(String id, String descripcion, int stock, double precioUnidad, double porcentajeGanancia) {
+    protected Producto(String id, String descripcion, int stock, double precioUnidad, double porcentajeGanancia, double porcentajeDto) {
         if (idValido(id)) {
             this.descripcion = descripcion;
             this.stock = stock;
             this.precioUnidad = precioUnidad;
             this.porcentajeGanancia = porcentajeGanancia;
+            this.porcentajeDto = porcentajeDto;
         }
     }
 
-    protected String getId() {
+    public String getId() {
         return id;
     }
 
-    protected String getDescripcion() {
+    public String getDescripcion() {
         return descripcion;
     }
 
-    protected int getStock() {
+    public int getStock() {
         return stock;
     }
 
-    protected void setStock(int stock) {
+    public void setStock(int stock) {
 
         this.stock = stock;
     }
@@ -65,10 +67,8 @@ public abstract class Producto {
         return disponibleParaVenta;
     }
 
-    protected void aplicarDescuento(double porcentajeDto) {
-
-        this.porcentajeDto = porcentajeDto;
-
+    public double getPorcentajeDto() {
+        return porcentajeDto;
     }
 
     public double costoTotal() {

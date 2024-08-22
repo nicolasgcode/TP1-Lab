@@ -1,4 +1,4 @@
-package logica;
+package modelos;
 
 import interfaces.IComestible;
 
@@ -7,8 +7,8 @@ public class ProductoEnvasado extends Producto implements IComestible {
     private String fechaVencimiento;
     private double calorias;
 
-    public ProductoEnvasado(String id, String descripcion, int stock, double precioUnidad, double porcentajeGanancia, String tipoEnvase, boolean esImportado, String fechaVencimiento, double calorias) {
-        super(id, descripcion, stock, precioUnidad, porcentajeGanancia, esImportado);
+    public ProductoEnvasado(String id, String descripcion, int stock, double precioUnidad, double porcentajeGanancia, String tipoEnvase, boolean esImportado, String fechaVencimiento, double calorias, double porcentajeDto) {
+        super(id, descripcion, stock, precioUnidad, porcentajeGanancia, esImportado, porcentajeDto);
         if (!this.idValido(id)) {
             System.out.println("Id invalido");
         } else {
@@ -18,6 +18,7 @@ public class ProductoEnvasado extends Producto implements IComestible {
             this.fechaVencimiento = fechaVencimiento;
             this.porcentajeGanancia = calcularPorcentajeGanancia();
             this.calorias = calorias;
+            aplicarDescuento(porcentajeDto);
         }
     }
 
@@ -39,10 +40,10 @@ public class ProductoEnvasado extends Producto implements IComestible {
         return 0 <= porcentajeDto && porcentajeDto <= 15;
     }
 
-    @Override
     public void aplicarDescuento(double porcentajeDto) {
         if (!validarDesc()) {
             System.out.println("El porcentaje de descuento descuento debe estar entre 0 y 15");
+            return;
         }
         this.porcentajeDto = porcentajeDto;
 

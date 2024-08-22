@@ -1,4 +1,4 @@
-package logica;
+package modelos;
 
 public class ProductoLimpieza extends Producto {
 
@@ -6,8 +6,8 @@ public class ProductoLimpieza extends Producto {
 
     TipoAplicacion tipoAplicacion;
 
-    public ProductoLimpieza(String id, String descripcion, int stock, double precioUnidad, double porcGanancia, String tipo) {
-        super(id, descripcion, stock, precioUnidad, porcGanancia);
+    public ProductoLimpieza(String id, String descripcion, int stock, double precioUnidad, double porcGanancia, String tipo, double porcentajeDto) {
+        super(id, descripcion, stock, precioUnidad, porcGanancia, porcentajeDto);
         if (!this.idValido(id)) {
             System.out.println("Id invalido");
             return;
@@ -19,6 +19,7 @@ public class ProductoLimpieza extends Producto {
         this.id = id;
         this.tipoAplicacion = TipoAplicacion.valueOf(tipo.toUpperCase());
         this.porcentajeGanancia = calcularPorcentajeGanancia(porcentajeGanancia);
+        aplicarDescuento(porcentajeDto);
     }
 
     @Override
@@ -36,6 +37,18 @@ public class ProductoLimpieza extends Producto {
         } catch (IllegalArgumentException e) {
             return false;
         }
+    }
+
+    public boolean validarDesc() {
+        return 0 <= porcentajeDto && porcentajeDto <= 20;
+    }
+
+    public void aplicarDescuento(double porcentajeDto) {
+        if (!validarDesc()) {
+            System.out.println("El porcentaje de descuento descuento debe estar entre 0 y 20");
+        }
+        this.porcentajeDto = porcentajeDto;
+
     }
 
     public double calcularPorcentajeGanancia(double porcentajeGanancia) {
