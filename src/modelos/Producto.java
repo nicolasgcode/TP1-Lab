@@ -62,7 +62,7 @@ public abstract class Producto {
         this.disponibleParaVenta = disponibleParaVenta;
     }
 
-    public boolean DisponibleParaVenta() {
+    public boolean disponibleParaVenta() {
 
         return disponibleParaVenta;
     }

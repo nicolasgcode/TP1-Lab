@@ -19,36 +19,31 @@ public class OperacionTienda {
             System.out.println("El producto no podrá ser agregado a la tienda por saldo insuficiente en la caja.");
             return;
         }
-        Stock.agregarStock(tienda, c);
+        if (!Stock.agregarStock(tienda, c)) {
+            return;
+        }
         double costo = calcularTotal(c, false);
         actualizarSaldo(tienda, -costo);
         imprimirTicket("COMPRA", c, tienda);
-        clean(c);
+        vaciar(c);
     }
 
     public static void Venta(Tienda tienda, Carro c) {
 
         if (validarCantidadProductos(c)) {
-            System.out.println("No se pueden vender más 3 productos.");
+            System.out.println("No se pueden vender más de 3 productos.");
             return;
         }
         if (tienda.getProductos().size() == 0) {
             System.out.println("No hay productos en stock");
             return;
         }
-        // c.getCarrito().forEach((prod, cant) -> {
-        // if (validarCantidadMaximaPorProductos(cant)) {
-        // c.getCarrito().put(prod, MAX_CANTIDAD);
-        // Stock.validarStockVenta(tienda, prod, MAX_CANTIDAD);
-        // return;
-        // }
-        // Stock.validarStockVenta(tienda, prod, cant);
-        // });
+
         Stock.eliminarStock(tienda, c);
         double costo = calcularTotal(c, true);
         actualizarSaldo(tienda, costo);
         imprimirTicket("VENTA", c, tienda);
-        clean(c);
+        vaciar(c);
     }
 
     public static void detalleTicket(Carro c) {
@@ -93,12 +88,12 @@ public class OperacionTienda {
         tienda.setSaldoCaja(tienda.getSaldoCaja() + costo);
     }
 
-    private static void clean(Carro c) {
+    private static void vaciar(Carro c) {
         total = 0;
-        c.emptyCarrito();
+        c.vaciarCarrito();
     }
 
-    public static Producto getProductoFromStock(Tienda tienda, Producto producto) {
+    public static Producto getProductoDelStock(Tienda tienda, Producto producto) {
         return tienda.getProductos().stream().filter(prod -> prod.getId().equals(producto.getId()))
                 .findFirst()
                 .orElse(null);

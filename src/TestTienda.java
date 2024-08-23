@@ -8,38 +8,67 @@ public class TestTienda {
 
         ProductoEnvasado p1 = new ProductoEnvasado("AB123", "fi", 9, 2, 2.3, "plastico", false, "19/8/2024", 100, 5);
         ProductoEnvasado p2 = new ProductoEnvasado("AB124", "ar", 20, 1, 2.3, "plastico", false, "12/13/12", 150, 123);
-        // ProductoBebida p2 = new ProductoBebida("AC124", "desc1", 20, 5,
-        // 2.3,0,false,0,"");
+        ProductoEnvasado p3 = new ProductoEnvasado("AB126", "fi", 9, 2, 2.3, "plastico", false, "19/8/2024", 100, 5);
+        ProductoEnvasado p4 = new ProductoEnvasado("AB127", "ar", 20, 1, 2.3, "plastico", false, "12/13/12", 150, 123);
 
-        Tienda t = new Tienda("fasuShop", 100, 1000);
-        // t.getProductos().add(p1);
-        // t.getProductos().add(p2);
 
-        System.out.println();
-        c.agregarAlCarrito(p2, 15);
-        c.agregarAlCarrito(p1, 15);
-        System.out.println(t);
-        OperacionTienda.Compra(t, c);
+        //CU: Compra exitosa --
+//        Tienda t = new Tienda("GenericShop", 100, 1000);
+//        c.agregarAlCarrito(p1, 15);
+//        c.agregarAlCarrito(p2, 15);
+//        c.agregarAlCarrito(p3, 15);
+//        c.agregarAlCarrito(p4, 15);
+//        System.out.println(t);
+//        OperacionTienda.Compra(t, c);
 
-        // c.addItemToCart(p1, 12);
-        // OperacionTienda.Compra(t);
+        //CU: Intento de compra con saldo insuficiente --
+//        Tienda t = new Tienda("GenericShop", 100, 10);
+//        c.agregarAlCarrito(p2, 15);
+//        c.agregarAlCarrito(p1, 15);
+//        System.out.println(t);
+//        OperacionTienda.Compra(t, c);
 
-        // System.out.println(OperacionTienda.getSaleList().toString());
+        //CU: Intento de compra cuando se ha alcanzado el stock máximo --
+//        Tienda t = new Tienda("GenericShop", 5, 1000);
+//        c.agregarAlCarrito(p2, 15);
+//        System.out.println(t);
+//        OperacionTienda.Compra(t, c);
+//        System.out.println(t);
 
-        OperacionTienda.obtenerComestiblesConMenorDescuento(t, 5.9);
 
-        c.agregarAlCarrito(p2, 15);
-        c.agregarAlCarrito(p1, 15);
+//---------------------------------------------------------------------------------------------------------
 
-        OperacionTienda.Venta(t, c);
+        //CU: Venta exitosa --
+//        c.agregarAlCarrito(p1, 13);
+//        c.agregarAlCarrito(p2, 15);
+//        OperacionTienda.Venta(t, c);
+//        System.out.println(t);
 
-        System.out.println(t);
+        //CU: Intento de venta con más de 3 productos --
+//        c.agregarAlCarrito(p1, 13);
+//        c.agregarAlCarrito(p2, 15);
+//        c.agregarAlCarrito(p3, 13);
+//        c.agregarAlCarrito(p4, 13);
+//        OperacionTienda.Venta(t, c);
+//        System.out.println(t);
 
-        // // OperacionTienda.setMiVenta(10, p1);
-        // // OperacionTienda.setMiVenta(8, p2);
+        //CU: Intento de venta con más de 12 unidades por producto --
+//        c.agregarAlCarrito(p1, 15);
+//        c.agregarAlCarrito(p3, 13);
+//        c.agregarAlCarrito(p4, 15);
+//        OperacionTienda.Venta(t, c);
+//        System.out.println(t);
 
-        // System.out.println(t);
+        //CU: Intento de venta con producto no disponible --
+//        c.agregarAlCarrito(p2, 15);
+//        OperacionTienda.Venta(t, c);
+//        System.out.println(t);
+//        c.agregarAlCarrito(p2, 15);
+//        OperacionTienda.Venta(t, c);
 
+        //CU:Obtener comestibles con menor desc
+//        OperacionTienda.obtenerComestiblesConMenorDescuento(t, 5.9);
+        
     }
 
 }
