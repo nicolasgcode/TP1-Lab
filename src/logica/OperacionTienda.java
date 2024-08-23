@@ -99,13 +99,12 @@ public class OperacionTienda {
                 .orElse(null);
     }
 
-    public static void obtenerComestiblesConMenorDescuento(Tienda tienda, double desc) {
+    public static List<String> obtenerComestiblesConMenorDescuento(Tienda tienda, double desc) {
 
-        tienda.getProductos().stream()
+        return tienda.getProductos().stream()
                 .filter(prod -> prod instanceof IComestible && prod.esImportado() == false
                         && prod.getPorcentajeDto() < desc)
-                .sorted(Comparator.comparing(Producto::getPrecioUnidad)).forEach(p -> {
-                    System.out.println(p.getDescripcion().toUpperCase());
-                });
+                .sorted(Comparator.comparing(Producto::getPrecioUnidad)).map(Producto::getDescripcion)
+                .map(String::toUpperCase).toList();
     }
 }

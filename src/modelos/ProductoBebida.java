@@ -24,7 +24,7 @@ public class ProductoBebida extends Producto implements IComestible {
 
     public double calcularCalorias(double calorias) {
         if (gradAlcohol < 0) {
-            System.out.println("Ingrese un número válido de calorías");
+            System.out.println("Ingrese un número válido de graduación alcohólica");
             return 0;
         }
         if (0 <= gradAlcohol && gradAlcohol <= 2) {
@@ -68,6 +68,7 @@ public class ProductoBebida extends Producto implements IComestible {
     public void aplicarDescuento(double porcentajeDto) {
         if (!validarDesc()) {
             System.out.println("El porcentaje de descuento descuento debe estar entre 0 y 10");
+            return;
         }
         this.porcentajeDto = porcentajeDto;
 

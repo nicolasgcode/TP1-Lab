@@ -46,6 +46,7 @@ public class ProductoLimpieza extends Producto {
     public void aplicarDescuento(double porcentajeDto) {
         if (!validarDesc()) {
             System.out.println("El porcentaje de descuento descuento debe estar entre 0 y 20");
+            return;
         }
         this.porcentajeDto = porcentajeDto;
 
