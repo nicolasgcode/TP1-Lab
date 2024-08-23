@@ -77,7 +77,7 @@ public class TestTienda {
 //        OperacionTienda.Venta(t, c);
 
         //CU 6:Obtener comestibles con menor descuento
-//        System.out.println(OperacionTienda.obtenerComestiblesConMenorDescuento(t, 7));
+        System.out.println("Productos comestibles con menor descuento: " + OperacionTienda.obtenerComestiblesConMenorDescuento(t, 7));
 
     }
 

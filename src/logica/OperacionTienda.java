@@ -46,7 +46,7 @@ public class OperacionTienda {
         vaciar(c);
     }
 
-    public static void detalleTicket(Carro c) {
+    private static void detalleTicket(Carro c) {
         c.getCarrito().forEach((prod, cant) -> {
             System.out.println(
                     String.format("%s %s %d x %.2f", prod.getId(), prod.getDescripcion(), cant,
@@ -54,7 +54,7 @@ public class OperacionTienda {
         });
     }
 
-    public static void imprimirTicket(String detalle, Carro c, Tienda tienda) {
+    private static void imprimirTicket(String detalle, Carro c, Tienda tienda) {
         System.out.println(String.format("===========TICKET %s===========", detalle));
         detalleTicket(c);
         System.out.println(String.format("Total $%.2f", total));
@@ -70,7 +70,7 @@ public class OperacionTienda {
         return cant > MAX_CANTIDAD;
     }
 
-    public static boolean saldoSuficiente(Tienda tienda, int c) {
+    private static boolean saldoSuficiente(Tienda tienda, int c) {
         return tienda.getSaldoCaja() >= c;
     }
 
@@ -84,7 +84,7 @@ public class OperacionTienda {
         return total;
     }
 
-    public static void actualizarSaldo(Tienda tienda, double costo) {
+    private static void actualizarSaldo(Tienda tienda, double costo) {
         tienda.setSaldoCaja(tienda.getSaldoCaja() + costo);
     }
 

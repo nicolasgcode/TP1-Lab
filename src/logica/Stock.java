@@ -3,11 +3,9 @@ package logica;
 import modelos.Producto;
 import modelos.Tienda;
 
-import java.util.List;
-
 public class Stock {
 
-    public static boolean validarStockMax(Tienda tienda, Carro c) {
+    private static boolean validarStockMax(Tienda tienda, Carro c) {
         return c.getCarrito().values().stream()
                 .mapToInt(v -> v)
                 .sum() <= tienda.getStockMax() &&
